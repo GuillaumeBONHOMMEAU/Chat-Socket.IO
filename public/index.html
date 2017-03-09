@@ -1,141 +1,215 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title>Chat 1.0</title>
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+	<meta charset="utf-8" />
+	<title>Chat 1.0</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-    <!-- Begin emoji-picker Stylesheets -->
-    <link href="lib/css/nanoscroller.css" rel="stylesheet">
-    <link href="lib/css/emoji.css" rel="stylesheet">
-    <!-- End emoji-picker Stylesheets -->
+	<!-- Begin emoji-picker Stylesheets -->
+	<link href="lib/css/nanoscroller.css" rel="stylesheet">
+	<link href="lib/css/emoji.css" rel="stylesheet">
+	<!-- End emoji-picker Stylesheets -->
 
-    <link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#">An Awesome Chat</a>
-            </div>
-            <ul class="nav navbar-nav">
-                <li class="active"><a href="#">Home</a></li>
-                <li><a href="#">Page 1</a></li>
-                <li><a href="#">Page 2</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="#"><span class="glyphicon glyphicon-user"></span>Login</a></li>
-                <li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Register</a></li>
-            </ul>
-        </div>
-    </nav>
+	<div class="modal fade" id="myModal" role="dialog">
+		<div id="login-overlay" class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+					<h4 class="modal-title" id="myModalLabel">Login to site.com</h4>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xs-6">
+							<div class="well">
+								<form id="loginForm" method="POST" action="/login/" novalidate="novalidate">
+									<div class="form-group">
+										<label for="username" class="control-label">Username</label>
+										<input type="text" class="form-control" id="username" name="username" value="" required="" title="Please enter you username" placeholder="example@gmail.com">
+										<span class="help-block"></span>
+									</div>
+									<div class="form-group">
+										<label for="password" class="control-label">Password</label>
+										<input type="password" class="form-control" id="password" name="password" value="" required="" title="Please enter your password">
+										<span class="help-block"></span>
+									</div>
+									<div id="loginErrorMsg" class="alert alert-error hide">Wrong username og password</div>
+									<div class="checkbox">
+										<label>
+											<input type="checkbox" name="remember" id="remember"> Remember login
+										</label>
+										<p class="help-block">(if this is a private computer)</p>
+									</div>
+									<button type="submit" class="btn btn-success btn-block" id="btnLogin">Login</button>
+								</form>
+							</div>
+						</div>
+						<div class="col-xs-6">
+							<p class="lead">Acces avec un pseudo temporaire</p>
+							<div class="form-group">
+								<label for="own" class="control-label">Ton propre pseudo</label>
+								<input type="text" class="form-control" id="own">
+								<span class="help-block"></span>
+							</div>
+
+							<div class="form-group inner-addon right-addon">
+								<label for="generate" class="control-label">Pseudo généré</label>
+								<input type="text" class="form-control" id="generate">
+								<span id="test" class="glyphicon glyphicon-repeat"></span>
+							</div>
+
+							<button type="button" class="btn btn-info btn-block" id="btnJoin">Join</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="#">An Awesome Chat</a>
+			</div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li>
+				<li><a href="#">Page 1</a></li>
+				<li><a href="#">Page 2</a></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><span class="glyphicon glyphicon-user"></span>Login</a></li>
+				<li><a href="#"><span class="glyphicon glyphicon-log-in"></span>Register</a></li>
+			</ul>
+		</div>
+	</nav>
 
 
-    <div class="col-md-2">
-        <button type="button" class="btn btn-primary">Start Broadcasting</button>
-        <div class="panel panel-default">
-            <div class="panel-heading">Chat&nbsp;Room&nbsp;User</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-    </div>
-    <div class="col-md-8">
-        <div class="container">
-            <div class="panel panel-default">
-                <div class="panel-heading lobbyListing">
-                    <button type="button" class="btn btn-primary">The Lobby&nbsp;<span class="badge">70</span></button>
-                    <button type="button" class="btn btn-primary">Chillax&nbsp;<span class="badge">15</span></button>
-                    <button type="button" class="btn btn-primary">Relax&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
-                </div>
-                <div class="panel-body">
-                    <section id="zone_chat"></section>
+	<div class="col-md-2">
+		<button type="button" id="btnStartBroadcast" class="btn btn-primary">Start Broadcasting</button>
+		<div id="panelUserList" class="panel panel-default">
+			<div class="panel-heading">Chat&nbsp;Room&nbsp;User</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+			<div class="panel-body">Username</div>
+		</div>
+	</div>
+	<div class="col-md-8">
+		<div class="panel panel-default">
+			<div class="panel-heading lobbyListing">
+				<button type="button" class="btn btn-primary">The Lobby&nbsp;<span class="badge">70</span></button>
+				<button type="button" class="btn btn-primary">Chillax&nbsp;<span class="badge">15</span></button>
+				<button type="button" class="btn btn-primary">Relax&nbsp;<span class="glyphicon glyphicon-remove"></span></button>
+			</div>
+			<div class="panel-body">
+				<section id="zone_chat"></section>
 
-                    <form action="/" method="post" id="formulaire_chat">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                            <textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
-                            placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
-                            <!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>             
-    </div>
-    <div class="col-md-2">
-        <div class="panel panel-default">
-            <div class="panel-heading">Trending</div>
-            <div class="panel-body">Panel Content</div>
-        </div>
-    </div>
+				<form action="/" method="post" id="formulaire_chat">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+						<textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
+						placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
+						<!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
+					</div>
+				</form>
+			</div>
+		</div>           
+	</div>
+	<div class="col-md-2">
+		<div class="panel panel-default">
+			<div class="panel-heading">Trending</div>
+			<div class="panel-body">Panel Content</div>
+		</div>
+	</div>
 
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Begin emoji-picker JavaScript -->
-    <script src="lib/js/nanoscroller.min.js"></script>
-    <script src="lib/js/tether.min.js"></script>
-    <script src="lib/js/config.js"></script>
-    <script src="lib/js/util.js"></script>
-    <script src="lib/js/jquery.emojiarea.js"></script>
-    <script src="lib/js/emoji-picker.js"></script>
-    <!-- End emoji-picker JavaScript -->
+	<!-- Begin emoji-picker JavaScript -->
+	<script src="lib/js/nanoscroller.min.js"></script>
+	<script src="lib/js/tether.min.js"></script>
+	<script src="lib/js/config.js"></script>
+	<script src="lib/js/util.js"></script>
+	<script src="lib/js/jquery.emojiarea.js"></script>
+	<script src="lib/js/emoji-picker.js"></script>
+	<!-- End emoji-picker JavaScript -->
 
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-            // Connection to socket.io
-            var socket = io.connect('http://localhost:8080');
+	<script src="/socket.io/socket.io.js"></script>
+	<script>
+			// Connection to socket.io
+			var socket = io.connect('http://localhost:8080');
+			var pseudo = '';
 
-            // Request nickname to send it to server
-            var pseudo = prompt('Quel est votre pseudo ?');
-            socket.emit('nouveau_client', pseudo);
-            document.title = pseudo + ' - ' + document.title;
+			$(document).ready(function(){
+				// Show the Modal on load
+				$("#myModal").modal("show");
 
-            // Display while receive message
-            socket.on('message', function(data) {
-                insereMessage(data.pseudo, data.message)
-            })
+				$('#btnJoin').click(function(){
+					// Request nickname to send it to server
+					pseudo = $('#own').val() ? $('#own').val() : $('#generate').val();
 
-            // Log while connecting
-            socket.on('nouveau_client', function(pseudo) {
-                $('#zone_chat').append('<p class="alert alert-info"><em>' + pseudo + ' a rejoint le Chat !</em></p>');
-            });
+					socket.emit('nouveau_client', pseudo);
+					
+					$("#myModal").modal("hide");
+				});
 
-            // Form sending then printing message         
-            function writing(event) {
-                // If key enter pressed
-                if (event.which == 13 || event.keyCode == 13) {
-                    var message = document.getElementById('message').parentNode.textContent;
-                    socket.emit('message', message); // Broadcast emit
-                    insereMessage(pseudo, message); // Display message
-                    var p = document.getElementsByClassName('emoji-wysiwyg-editor');
-                    p["message"].textContent='';
-                    //$('#message').focus(); // Reset textarea value with focus kept
-                    return false;
-                }
-            }
+				$('#test').click(function(){
+					var a = $.post('/test');
+					var b = $('#generate');
+		            b.val(a);
+		            alert(ok);
+		        });
+			});			
 
-            // Ajoute un message dans la page
-            function insereMessage(pseudo, message) {
-                $('#zone_chat').append('<p><strong>' + pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>');
-            }
-        </script>
+			// Display while receive message
+			socket.on('message', function(data) {
+				insereMessage(data.pseudo, data.message)
+			})
 
-        <script>
-            $(function() {
-                // Initializes and creates emoji set from sprite sheet
-                window.emojiPicker = new EmojiPicker({
-                    emojiable_selector: '[data-emojiable=true]',
-                    assetsPath: 'lib/img/',
-                    popupButtonClasses: 'fa fa-smile-o'
-                });
+			// Log while connecting
+			socket.on('nouveau_client', function(pseudo) {
+				$('#zone_chat').append('<p class="alert alert-info"><em>' + pseudo + ' a rejoint le Chat !</em></p>');
+			});
 
-                // Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
-                // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
-                // It can be called as many times as necessary; previously converted input fields will not be converted again
-                window.emojiPicker.discover();
-            });
-        </script>
-</body>
-</html>
+			// Form sending then printing message         
+			function writing(event) {
+				// If key enter pressed
+				if (event.which == 13 || event.keyCode == 13) {
+					var message = document.getElementById('message').parentNode.textContent;
+					socket.emit('message', message); // Broadcast emit
+					insereMessage(pseudo, message); // Display message
+					document.getElementsByClassName('emoji-wysiwyg-editor')["message"].textContent='';
+					return false;
+				}
+			}
+
+			// Ajoute un message dans la page
+			function insereMessage(pseudo, message) {
+				$('#zone_chat').append('<p><strong>' + pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>');
+			}
+		</script>
+
+		<script>
+			$(function() {
+				// Initializes and creates emoji set from sprite sheet
+				window.emojiPicker = new EmojiPicker({
+					emojiable_selector: '[data-emojiable=true]',
+					assetsPath: 'lib/img/',
+					popupButtonClasses: 'fa fa-smile-o'
+				});
+
+				// Finds all elements with `emojiable_selector` and converts them to rich emoji input fields
+				// You may want to delay this step if you have dynamically created input fields that appear later in the loading process
+				// It can be called as many times as necessary; previously converted input fields will not be converted again
+				window.emojiPicker.discover();
+			});
+		</script>
+	</body>
+	</html>

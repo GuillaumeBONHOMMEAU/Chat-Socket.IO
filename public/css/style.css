@@ -3,7 +3,61 @@
    	padding: 2px;
 }
 
-.lobyListing button span.glyphicon
+span.glyphicon::before
 {
-	font-size: small;
+	font-size: 13px;
+}
+
+#btnStartBroadcast
+{
+	width: 100%;
+	padding: 17px 0;
+}
+
+#panelUserList
+{
+	margin-top:	15px;
+	margin-bottom: 15px;
+}
+
+#panelUserList div.panel-body 
+{
+    padding-top: 8px;
+    padding-bottom: 8px;
+}
+
+/* enable absolute positioning */
+.inner-addon { 
+    position: relative; 
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.left-addon .glyphicon  { left:  0px;}
+.right-addon .glyphicon { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+#test
+{
+	opacity: 1;
+	left: 247px;
+	top: 35.5px;
+	width: 19px;
+	min-width: 19px;
+	height: 13px;
+	position: absolute;
+	border: medium none;
+	display: inline;
+	visibility: visible;
+	z-index: auto;
+	padding: 0;
 }
