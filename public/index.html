@@ -154,7 +154,7 @@
 				$('#btnJoin').click(function(){
 					// Request nickname to send it to server
 					pseudo = $('#own').val() ? $('#own').val() : $('#generate').val();
-
+					
 					socket.emit('nouveau_client', pseudo);
 					
 					$("#myModal").modal("hide");
