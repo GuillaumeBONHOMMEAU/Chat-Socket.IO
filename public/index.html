@@ -55,7 +55,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
                             <textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
-                            placeholder="Votre message..." rows="2" data-emojiable="true" autofocus></textarea>
+                            placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
                             <!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
                         </div>
                     </form>
@@ -82,6 +82,7 @@
     <script src="lib/js/emoji-picker.js"></script>
     <!-- End emoji-picker JavaScript -->
 
+    <script src="/socket.io/socket.io.js"></script>
     <script>
             // Connection to socket.io
             var socket = io.connect('http://localhost:8080');
@@ -99,16 +100,18 @@
             // Log while connecting
             socket.on('nouveau_client', function(pseudo) {
                 $('#zone_chat').append('<p class="alert alert-info"><em>' + pseudo + ' a rejoint le Chat !</em></p>');
-            })
+            });
 
             // Form sending then printing message         
             function writing(event) {
                 // If key enter pressed
                 if (event.which == 13 || event.keyCode == 13) {
-                    var message = $('#message').val();
+                    var message = document.getElementById('message').parentNode.textContent;
                     socket.emit('message', message); // Broadcast emit
                     insereMessage(pseudo, message); // Display message
-                    $('#message').val('').focus(); // Reset textarea value with focus kept
+                    var p = document.getElementsByClassName('emoji-wysiwyg-editor');
+                    p["message"].textContent='';
+                    //$('#message').focus(); // Reset textarea value with focus kept
                     return false;
                 }
             }
@@ -119,7 +122,6 @@
             }
         </script>
 
-        <script src="/socket.io/socket.io.js"></script>
         <script>
             $(function() {
                 // Initializes and creates emoji set from sprite sheet

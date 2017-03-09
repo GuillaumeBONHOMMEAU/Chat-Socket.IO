@@ -350,6 +350,9 @@
 			'data-type': 'input',
 			'placeholder': $textarea.attr('placeholder'),
 			'contenteditable': 'true',
+			"onkeypress" : "return writing(event)",
+			"id":"message",
+			"tabindex":"1"
 		});
 
 		/*
@@ -372,17 +375,18 @@
 			document.execCommand('enableObjectResizing', true, true);
 		});
 
-    var editorDiv = this.$editor;
+		var editorDiv = this.$editor;
 		this.$editor.on("change keydown keyup resize scroll", function(e) {
-      if(MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) == -1 &&
-				!((e.ctrlKey || e.metaKey) && e.which == 65) && // Ctrl + A
-				!((e.ctrlKey || e.metaKey) && e.which == 67) && // Ctrl + C
-				editorDiv.text().length + editorDiv.find('img').length >= editorDiv.attr('maxlength'))
-      {
-        e.preventDefault();
-      }
-      self.updateBodyPadding(editorDiv);
-    });
+	      	if(MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) == -1 &&
+					!((e.ctrlKey || e.metaKey) && e.which == 65) && // Ctrl + A
+					!((e.ctrlKey || e.metaKey) && e.which == 67) && // Ctrl + C
+					editorDiv.text().length + editorDiv.find('img').length >= editorDiv.attr('maxlength'))
+	      	{
+	        	e.preventDefault();
+	      	}
+
+	      	self.updateBodyPadding(editorDiv);
+    	});
 
 		if (this.options.onPaste) {
 			var self = this;
