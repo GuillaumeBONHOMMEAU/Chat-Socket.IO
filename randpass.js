@@ -34,68 +34,66 @@ function getRandomInt (min, max) {
  *
  */
 
- var randpass = function (options) {
+var randpass = function (options) {
   if (typeof options === 'number') options = { length: options }
-    else if (typeof options !== 'object') options = {}
+  else if (typeof options !== 'object') options = {}
 
-      var str = '',
-    vowels = 'aeiouy',
-    consonants = 'bdghjmnpqrstvwxz',
-    letters = vowels + consonants,
-    numbers = '23456789',
-    symbols = '!#$%^-',
-    length = options.length >= 8 ? Math.floor(options.length) : 8,
-    alternateLetters = 'alternate' in options ? options.alternate : true,
-    allowSymbols = 'symbols' in options ? options.symbols : true,
-    allowCapitals = 'capitals' in options ? options.capitals : true,
-    alt = !getRandomInt(0, 1),
-    numpos = getRandomInt(2, length - 1),
-    sympos = allowSymbols ? getRandomInt(2, length) : 0,
-    cappos = allowCapitals ? getRandomInt(1, length) : 0
+  var str = ''
+  var vowels = 'aeiouy'
+  var consonants = 'bdghjmnpqrstvwxz'
+  var letters = vowels + consonants
+  var numbers = '23456789'
+  var symbols = '!#$%^-'
+  var length = options.length >= 8 ? Math.floor(options.length) : 8
+  var alternateLetters = 'alternate' in options ? options.alternate : true
+  var allowSymbols = 'symbols' in options ? options.symbols : true
+  var allowCapitals = 'capitals' in options ? options.capitals : true
+  var alt = !getRandomInt(0, 1)
+  var numpos = getRandomInt(2, length - 1)
+  var sympos = allowSymbols ? getRandomInt(2, length) : 0
+  var cappos = allowCapitals ? getRandomInt(1, length) : 0
 
   // Massage the positions
   // It may require a little mental gymnastics to understand
   if (allowSymbols && sympos === numpos) sympos++
-    if (allowCapitals && cappos === sympos) cappos--
-      if (allowCapitals && cappos === numpos) cappos--
-        if (allowCapitals && cappos === sympos) cappos--
+  if (allowCapitals && cappos === sympos) cappos--
+  if (allowCapitals && cappos === numpos) cappos--
+  if (allowCapitals && cappos === sympos) cappos--
 
   // Build up the `str` 1 character at a time
-while (str.length < length)   {
-  switch (str.length + 1)       {
-    case numpos:
-    str += numbers.substr(getRandomInt(1, numbers.length) - 1, 1)
-    break
+  while (str.length < length) {
+    switch (str.length + 1) {
+      case numpos:
+        str += numbers.substr(getRandomInt(1, numbers.length) - 1, 1)
+        break
+      case cappos:
+        if (!alternateLetters) {
+          str += letters.substr(getRandomInt(1, letters.length) - 1, 1).toUpperCase()
+        } else if (alt) {
+          str += consonants.substr(getRandomInt(1, consonants.length) - 1, 1).toUpperCase()
+          alt = !alt
+        } else {
+          str += vowels.substr(getRandomInt(1, vowels.length) - 1, 1).toUpperCase()
+          alt = !alt
+        }
+        break
 
-    case cappos:
-    if (!alternateLetters) {
-      str += letters.substr(getRandomInt(1, letters.length) - 1, 1).toUpperCase()
-    } else if (alt) {
-      str += consonants.substr(getRandomInt(1, consonants.length) - 1, 1).toUpperCase()
-      alt = !alt
-    } else {
-      str += vowels.substr(getRandomInt(1, vowels.length) - 1, 1).toUpperCase()
-      alt = !alt
-    }
-    break
+      case sympos:
+        str += symbols.substr(getRandomInt(1, symbols.length) - 1, 1)
+        break
 
-    case sympos:
-    str += symbols.substr(getRandomInt(1, symbols.length) - 1, 1)
-    break
-
-    default:
-    if (!alternateLetters) {
-      str += letters.substr(getRandomInt(1, letters.length) - 1, 1)
-    } else if (alt) {
-      str += consonants.substr(getRandomInt(1, consonants.length) - 1, 1)
-      alt = !alt
-    } else {
-      str += vowels.substr(getRandomInt(1, vowels.length) - 1, 1)
-      alt = !alt
+      default:
+        if (!alternateLetters) {
+          str += letters.substr(getRandomInt(1, letters.length) - 1, 1)
+        } else if (alt) {
+          str += consonants.substr(getRandomInt(1, consonants.length) - 1, 1)
+          alt = !alt
+        } else {
+          str += vowels.substr(getRandomInt(1, vowels.length) - 1, 1)
+          alt = !alt
+        }
     }
   }
+  return str
 }
-return str
-}
-
 exports.randpass = randpass
