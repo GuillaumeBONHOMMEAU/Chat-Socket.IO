@@ -46,24 +46,21 @@
 
   $.fn.emojiarea = function (options) {
     options = $.extend({}, options)
-    return this
-      .each(function () {
-  var originalInput = $(this)
-  if ('contentEditable' in document.body &&
-          options.wysiwyg !== false) {
-    var id = getGuid()
-    new EmojiArea_WYSIWYG(originalInput, id, $.extend({}, options))
-  } else {
-    var id = getGuid()
-    new EmojiArea_Plain(originalInput, id, options)
-  }
-  originalInput.attr(
-    {
-      'data-emojiable': 'converted',
-      'data-id': id,
-      'data-type': 'original-input'
+    return this.each(function () {
+      var originalInput = $(this)
+      if ('contentEditable' in document.body && options.wysiwyg !== false) {
+        var id = getGuid()
+        new EmojiArea_WYSIWYG(originalInput, id, $.extend({}, options))
+      } else {
+        var id = getGuid()
+        new EmojiArea_Plain(originalInput, id, options)
+      }
+      originalInput.attr({
+        'data-emojiable': 'converted',
+        'data-id': id,
+        'data-type': 'original-input'
+      })
     })
-})
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -91,7 +88,8 @@
   util.saveSelection = (function () {
     if (window.getSelection) {
       return function () {
-        var sel = window.getSelection(), ranges = []
+        var sel = window.getSelection()
+        var ranges = []
         if (sel.rangeCount) {
           for (var i = 0, len = sel.rangeCount; i < len; ++i) {
             ranges.push(sel.getRangeAt(i))
@@ -111,7 +109,8 @@
   util.replaceSelection = (function () {
     if (window.getSelection) {
       return function (content) {
-        var range, sel = window.getSelection()
+        var range
+        var sel = window.getSelection()
         var node = typeof content === 'string' ? document
             .createTextNode(content) : content
         if (sel.getRangeAt && sel.rangeCount) {
@@ -144,7 +143,10 @@
 
   util.insertAtCursor = function (text, el) {
     text = ' ' + text
-    var val = el.value, endIndex, startIndex, range
+    var val = el.value
+    var endIndex
+    var startIndex
+    var range
     if (typeof el.selectionStart !== 'undefined' &&
         typeof el.selectionEnd !== 'undefined') {
       startIndex = el.selectionStart
@@ -196,7 +198,7 @@
       if (!pos) {
         return false
       }
-      if (pos != -1) {
+      if (pos !== -1) {
         curEmojis.splice(pos, 1)
       }
       curEmojis.unshift(emojiKey)
@@ -305,7 +307,7 @@
   }
 
   EmojiArea_Plain.prototype.val = function () {
-    if (this.$textarea == '\n') { return '' }
+    if (this.$textarea === '\n') { return '' }
     return this.$textarea.val()
   }
 
@@ -325,9 +327,12 @@
 
   var EmojiArea_WYSIWYG = function ($textarea, id, options) {
     var self = this
-
     this.options = options || {}
-    if ($($textarea).attr('data-emoji-input') === 'unicode') { this.options.inputMethod = 'unicode' } else      { this.options.inputMethod = 'image' }
+    if ($($textarea).attr('data-emoji-input') === 'unicode') {
+      this.options.inputMethod = 'unicode' 
+    } else {
+      this.options.inputMethod = 'image'
+    }
     this.id = id
     this.$textarea = $textarea
     this.emojiPopup = options.emojiPopup
@@ -371,15 +376,14 @@
 
     var editorDiv = this.$editor
     this.$editor.on('change keydown keyup resize scroll', function (e) {
-          if (MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) == -1 &&
-          !((e.ctrlKey || e.metaKey) && e.which == 65) && // Ctrl + A
-          !((e.ctrlKey || e.metaKey) && e.which == 67) && // Ctrl + C
-          editorDiv.text().length + editorDiv.find('img').length >= editorDiv.attr('maxlength'))          {
-            e.preventDefault()
-          }
-
-          self.updateBodyPadding(editorDiv)
-      })
+      if (MAX_LENGTH_ALLOWED_KEYS.indexOf(e.which) === -1 &&
+      !((e.ctrlKey || e.metaKey) && e.which === 65) && // Ctrl + A
+      !((e.ctrlKey || e.metaKey) && e.which === 67) && // Ctrl + C
+      editorDiv.text().length + editorDiv.find('img').length >= editorDiv.attr('maxlength')) {
+        e.preventDefault()
+      }
+      self.updateBodyPadding(editorDiv)
+    })
 
     if (this.options.onPaste) {
       var self = this
@@ -437,7 +441,7 @@
      * implementation of createIcon function.
      */
     var insertionContent = ''
-    if (this.options.inputMethod == 'unicode') {
+    if (this.options.inputMethod === 'unicode') {
       insertionContent = this.emojiPopup.colonToUnicode(emoji)
     } else {
       var $img = $(EmojiArea.createIcon($.emojiarea.icons[emoji]))
@@ -498,7 +502,7 @@
 
         var children = node.childNodes
         for (var i = 0; i < children.length; i++) {
-           sanitizeNode(children[i])
+          sanitizeNode(children[i])
         }
 
         if (isBlock && line.length) { flush() }
@@ -581,14 +585,11 @@
      * to add scrollbars to EmojiMenu
      */
 
-      if (!Config.Mobile) {
-      this.$itemsWrap.nanoScroller({preventPageScrolling: true,
-    tabIndex:
-      -1})
-  }
+    if (!Config.Mobile) {
+      this.$itemsWrap.nanoScroller({preventPageScrolling: true, tabIndex: -1})
+    }
 
     // this.$itemsWrap.nanoScroller({preventPageScrolling: true, tabIndex:* -1});
-
     $body.on('keydown', function (e) {
       if (e.keyCode === KEY_ESC || e.keyCode === KEY_TAB) {
         self.hide()
@@ -615,10 +616,10 @@
         return
       }
 
-      while (target && target != window) {
+      while (target && target !== window) {
         target = target.parentNode
-        if (target == self.$menu[0] || self.emojiarea &&
-            target == self.emojiarea.$button[0]) {
+        if (target === self.$menu[0] || self.emojiarea &&
+            target === self.emojiarea.$button[0]) {
           return
         }
       }
@@ -692,10 +693,9 @@
     this.currentCategory = category
     this.load(category)
 
-     if (!Config.Mobile) {
-   this.$itemsWrap.nanoScroller({ scroll: 'top'
-     })
- }
+    if (!Config.Mobile) {
+      this.$itemsWrap.nanoScroller({ scroll: 'top'})
+    }
   }
   /* ! MODIFICATION END */
 
@@ -727,12 +727,11 @@
      */
     var updateItems = function () {
       self.$items.html(html.join(''))
-
-        if (!Config.Mobile) {
-    setTimeout(function () {
-        self.$itemsWrap.nanoScroller()
-    }, 100)
-  }
+      if (!Config.Mobile) {
+        setTimeout(function () {
+          self.$itemsWrap.nanoScroller()
+        }, 100)
+      }
     }
 
     if (category > 0) {
