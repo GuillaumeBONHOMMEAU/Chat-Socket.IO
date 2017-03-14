@@ -7,7 +7,11 @@ var fs = require('fs')
 var rd = require('./randpass')
 var port = process.env.PORT || 8080
 
-var chatList = ['The Lobby', 'Supernatural', 'Game of Thrones', 'Frontier', 'Shooter']
+var chatList = {'The Lobby': [],
+  'Supernatural': [],
+  'Game of Thrones': [],
+  'Frontier': [],
+  'Shooter': []}
 
 // Run the server
 server.listen(port, function () {
@@ -31,9 +35,15 @@ io.sockets.on('connection', function (pSocket) {
       // client will update details to be compliant
       pSocket.emit('updateClient', pSocket.user)
     }
+    chatList['The Lobby'].push(pSocket.user)
     pSocket.emit('updateChatList', chatList)
     pSocket.broadcast.emit('newClient', pSocket.user.pseudo)
     console.log('### A new user joined ... His name is ' + pSocket.user.pseudo)
+  })
+
+  pSocket.on('joinChat', function (pChatRoom) {
+    chatList[pChatRoom].push(pSocket.user)
+    pSocket.emit('updateChatList', chatList)
   })
 
     // As soon as we get message, we get pseudo and send message to others by broadcast

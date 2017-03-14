@@ -1,8 +1,8 @@
 // Connection to socket.io
 var socket = io.connect('http://localhost:8080')
+// user will be an object which will be simplify dev for next features
 var user = {
-  pseudo: '',
-  chat: ['lobby']
+  pseudo: ''
 }
 
       // Update user details
@@ -11,11 +11,28 @@ socket.on('updateClient', function (pUser) {
 })
 
 socket.on('updateChatList', function (pChatList) {
-  var panel = $('#chatList')
-  panel.empty()
-  pChatList.forEach(function (chat) {
-    panel.append('<div class="well">' + chat + '  <span class="label label-default"> 0 <span class="glyphicon glyphicon-user"></span></span></div>')
-  })
+  var panelTrending = $('#chatList')
+  panelTrending.empty()
+  for (var key in pChatList) {
+    panelTrending.append('<div class="well">' + key + '  <span class="label label-default"> ' + pChatList[key].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
+  }
+
+  var panelEnteredRoom = $('#lobbyListing')
+  panelEnteredRoom.empty()
+  for (var key in pChatList) {
+    for (var i = 0; i < pChatList[key].length; i++) {
+      if (pChatList[key][i].pseudo === user.pseudo) {
+        panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + key + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
+        break
+      }
+    }
+  }
+
+  var panelUserList = $('#panelUserList')
+  panelUserList.empty()
+  for (var key in pChatList['The Lobby']) {
+    panel.append('<div class="panel-body">' + key.pseudo + '</div>')
+  }
 })
 
       // Display while receive message
