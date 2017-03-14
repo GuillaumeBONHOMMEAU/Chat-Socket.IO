@@ -329,7 +329,7 @@
     var self = this
     this.options = options || {}
     if ($($textarea).attr('data-emoji-input') === 'unicode') {
-      this.options.inputMethod = 'unicode' 
+      this.options.inputMethod = 'unicode'
     } else {
       this.options.inputMethod = 'image'
     }
