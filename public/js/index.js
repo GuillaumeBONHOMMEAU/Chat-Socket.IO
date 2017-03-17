@@ -40,10 +40,10 @@ socket.on('updateChatList', function (pChatList) {
         lUser = element
       }
     })
-    if(lUser.pseudo === null || lUser.pseudo === 'undefined'){
+    if (lUser.pseudo === null || lUser.pseudo === 'undefined') {
       lUser.pseudo = 'Visiteur'
     }
-    panelUserList.append('<div class="panel-body" id="'+lUser.id+'">' + lUser.pseudo + '</div>')
+    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '</div>')
   }
 })
 
