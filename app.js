@@ -55,15 +55,6 @@ var chatObject = {
       }
     }
   },
-  /* getUserList : function() {
-    var list = [];
-    for(lobby in this.chats){
-      for(user in lobby){
-        list.push(user)
-      }
-    }
-    return list
-  }, */
   getPseudoListByChat: function () {
     var conn = []
     this.chat.forEach(function (data) {
@@ -95,8 +86,8 @@ io.sockets.on('connection', function (pSocket) {
     pSocket.emit('updateClient', pUser)
     chatObject.users.push(pUser)
     chatObject.userJoin(pUser.id, ['The Lobby'])
-    pSocket.emit('updateChatList', chatObject.chats)
-    pSocket.broadcast.emit('updateChatList', chatObject.chats)
+    pSocket.emit('updateChatList', chatObject)
+    pSocket.broadcast.emit('updateChatList', chatObject)
     pSocket.broadcast.emit('newClient', pUser.pseudo)
     console.log('### A new user joined ... His name is ' + pUser.pseudo)
     // chatList.getPseudoList()
@@ -104,8 +95,8 @@ io.sockets.on('connection', function (pSocket) {
 
   pSocket.on('joinChat', function (pChatRoom) {
     chatObject.userJoin(pSocket.id, [pChatRoom])
-    pSocket.emit('updateChatList', chatObject.chats)
-    pSocket.broadcast.emit('updateChatList', chatObject.chats)
+    pSocket.emit('updateChatList', chatObject)
+    pSocket.broadcast.emit('updateChatList', chatObject)
   })
 
     // As soon as we get message, we get pseudo and send message to others by broadcast

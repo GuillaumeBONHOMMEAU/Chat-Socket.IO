@@ -17,15 +17,15 @@ socket.on('updateClient', function (pUser) {
 socket.on('updateChatList', function (pChatList) {
   var panelTrending = $('#chatList')
   panelTrending.empty()
-  for (var key in pChatList) {
-    panelTrending.append('<div class="well">' + key + '  <span class="label label-default"> ' + pChatList[key].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
+  for (var chat in pChatList.chats) {
+    panelTrending.append('<div class="well">' + chat + '  <span class="label label-default"> ' + pChatList.chats[chat].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
   }
 
   var panelEnteredRoom = $('#lobbyListing')
   panelEnteredRoom.empty()
-  for (var chat in pChatList) {
-    for (var chatUser in pChatList[chat]) {
-      if (chatUser === user.id) {
+  for (var chat in pChatList.chats) {
+    for (var chatUser in pChatList.chats[chat]) {
+      if (pChatList.chats[chat][chatUser] === user.id) {
         panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
       }
     }
@@ -33,8 +33,17 @@ socket.on('updateChatList', function (pChatList) {
 
   var panelUserList = $('#panelUserList')
   panelUserList.empty()
-  for (var key in pChatList['The Lobby']) {
-    panelUserList.append('<div class="panel-body">' + pChatList['The Lobby'][key] + '</div>')
+  for (var userId in pChatList.chats['The Lobby']) {
+    var lUser = ''
+    pChatList.users.forEach(function (element) {
+      if (element.id === pChatList.chats['The Lobby'][userId]) {
+        lUser = element
+      }
+    })
+    if(lUser.pseudo === null || lUser.pseudo === 'undefined'){
+      lUser.pseudo = 'Visiteur'
+    }
+    panelUserList.append('<div class="panel-body" id="'+lUser.id+'">' + lUser.pseudo + '</div>')
   }
 })
 
