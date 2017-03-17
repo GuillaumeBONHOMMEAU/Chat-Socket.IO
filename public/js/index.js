@@ -1,12 +1,12 @@
 // Connection to socket.io
 var socket = io.connect('http://localhost:8080')
-  var user = {
-    pseudo: '',
-    id:''
-  }
-/*socket.on('connect', function() {
+var user = {
+  pseudo: '',
+  id: ''
+}
+/* socket.on('connect', function() {
   // user will be an object which will be simplify dev for next features
-})*/
+}) */
 
       // Update user details
 socket.on('updateClient', function (pUser) {
@@ -23,8 +23,8 @@ socket.on('updateChatList', function (pChatList) {
 
   var panelEnteredRoom = $('#lobbyListing')
   panelEnteredRoom.empty()
-  for(var chat in pChatList){
-    for(var chatUser in pChatList[chat]){
+  for (var chat in pChatList) {
+    for (var chatUser in pChatList[chat]) {
       if (chatUser === user.id) {
         panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
       }
@@ -71,7 +71,7 @@ function updateListOpenedRoom () {
 
 $(document).ready(function () {
         // Show the Modal on load if no pseudo recorded for current user
-  if ( user.pseudo === '') {
+  if (user.pseudo === '') {
     $('#myModal').modal('show')
 
         // join form submit

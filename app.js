@@ -17,45 +17,45 @@ app.use(session({
   cookieName: 'session',
   secret: 'ahah',
   duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000,
-}));
+  activeDuration: 5 * 60 * 1000
+}))
 
 // Load index.html page
 app.get('/', function (pReq, pRes) {
   pRes.sendfile(__dirname + '/public/index.html')
-});
+})
 
 // Set the default path root of internal ressources to /public
 app.use(express.static(__dirname + '/public'))
 
-app.use(function(req, res, next) {
-  console.log(req.session.id);
-});
+app.use(function (req, res, next) {
+  console.log(req.session.id)
+})
 
 var chatObject = {
-  'users' : [],
-  'chats' : {
+  'users': [],
+  'chats': {
     'The Lobby': [],
     'Supernatural': [],
     'Game of Thrones': [],
     'Frontier': [],
     'Shooter': []
   },
-  userJoin : function (pId, pListChat) {
-    pListChat.forEach(function(chat){
-      chatObject.chats[chat].push(pId);
+  userJoin: function (pId, pListChat) {
+    pListChat.forEach(function (chat) {
+      chatObject.chats[chat].push(pId)
     })
   },
-  removeUserById : function(pId) {
-    for(lobby in this.chats){
-      for(user in lobby){
-        if(user.id === pId){
+  removeUserById: function (pId) {
+    for (lobby in this.chats) {
+      for (user in lobby) {
+        if (user.id === pId) {
           list.push(user)
         }
       }
     }
   },
-  /*getUserList : function() {
+  /* getUserList : function() {
     var list = [];
     for(lobby in this.chats){
       for(user in lobby){
@@ -63,17 +63,17 @@ var chatObject = {
       }
     }
     return list
-  },*/
-  getPseudoListByChat : function() {
-    var conn = [];
-    this.chat.forEach(function(data){
-      conn.push(data.pseudo);
-    });
-    return conn;
+  }, */
+  getPseudoListByChat: function () {
+    var conn = []
+    this.chat.forEach(function (data) {
+      conn.push(data.pseudo)
+    })
+    return conn
   },
-  getUserById: function(pId) {
-    var r=''
-    this.users.forEach(function(user){ 
+  getUserById: function (pId) {
+    var r = ''
+    this.users.forEach(function (user) {
       if (user.id === pId) {
         r = user
       }
@@ -99,7 +99,7 @@ io.sockets.on('connection', function (pSocket) {
     pSocket.broadcast.emit('updateChatList', chatObject.chats)
     pSocket.broadcast.emit('newClient', pUser.pseudo)
     console.log('### A new user joined ... His name is ' + pUser.pseudo)
-    //chatList.getPseudoList()
+    // chatList.getPseudoList()
   })
 
   pSocket.on('joinChat', function (pChatRoom) {
@@ -111,16 +111,16 @@ io.sockets.on('connection', function (pSocket) {
     // As soon as we get message, we get pseudo and send message to others by broadcast
   pSocket.on('newMessage', function (message) {
     pSocket.broadcast.emit('newMessage', {
-      pseudo: chatObject.getUserById(pSocket.id).pseudo, 
+      pseudo: chatObject.getUserById(pSocket.id).pseudo,
       message: message
     })
   })
 
-  /*pSocket.on('disconnect',function(){
+  /* pSocket.on('disconnect',function(){
     var user = chatObject.getUserById(pSocket.id);
     chatObject.removeUserById(pSocket.id);
     console.log(user.pseudo +' disconnected')
-  })*/
+  }) */
 })
 
 server.listen(8080)
