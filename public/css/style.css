@@ -1,17 +1,19 @@
-#zone_chat strong 
-{
+#zone_chat strong {
    	padding: 2px;
 }
 
-span.glyphicon::before
-{
+span.glyphicon::before {
 	font-size: 13px;
 }
 
-#btnStartBroadcast
-{
+#btnStartBroadcast {
 	width: 100%;
 	padding: 17px 0;
+}
+
+#lobbyListing button {
+	margin-right: 5px;
+	margin-left: 5px;
 }
 
 #panelUserList

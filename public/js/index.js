@@ -18,7 +18,7 @@ socket.on('updateChatList', function (pChatList) {
   var panelTrending = $('#chatList')
   panelTrending.empty()
   for (var chat in pChatList.chats) {
-    panelTrending.append('<div class="well">' + chat + '  <span class="label label-default"> ' + pChatList.chats[chat].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
+    panelTrending.append('<div class="well" onclick="joinChat(\'' + chat + '\')">' + chat + '  <span class="label label-default"> ' + pChatList.chats[chat].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
   }
 
   var panelEnteredRoom = $('#lobbyListing')
@@ -72,6 +72,11 @@ function writing (event) {
       // Ajoute un message dans la page
 function insereMessage (pPseudo, pMessage) {
   $('#zone_chat').append('<p><strong>' + pPseudo + '&nbsp;:</strong>&nbsp;' + pMessage + '</p>')
+}
+
+function joinChat (chatName) {
+  alert('ha')
+  socket.emit('joinChat', chatName)
 }
 
 function updateListOpenedRoom () {
