@@ -1,0 +1,262 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'C:\\Program Files\\nodejs\\node.exe',
+1 verbose cli   'C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js',
+1 verbose cli   'cache',
+1 verbose cli   'clean' ]
+2 info using npm@3.10.10
+3 info using node@v6.9.5
+4 silly ls normalized .
+5 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\_locks is being purged
+6 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\_locks
+7 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\accepts is being purged
+8 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\accepts
+9 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\array-flatten is being purged
+10 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\array-flatten
+11 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\client-sessions is being purged
+12 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\client-sessions
+13 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\content-disposition is being purged
+14 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\content-disposition
+15 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\content-type is being purged
+16 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\content-type
+17 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie is being purged
+18 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie
+19 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie-signature is being purged
+20 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie-signature
+21 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\cookies is being purged
+22 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\cookies
+23 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\debug is being purged
+24 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\debug
+25 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\depd is being purged
+26 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\depd
+27 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\destroy is being purged
+28 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\destroy
+29 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\ee-first is being purged
+30 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\ee-first
+31 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\encodeurl is being purged
+32 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\encodeurl
+33 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\escape-html is being purged
+34 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\escape-html
+35 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\etag is being purged
+36 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\etag
+37 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\express is being purged
+38 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\express
+39 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\finalhandler is being purged
+40 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\finalhandler
+41 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\forwarded is being purged
+42 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\forwarded
+43 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\fresh is being purged
+44 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\fresh
+45 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\http-errors is being purged
+46 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\http-errors
+47 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\inherits is being purged
+48 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\inherits
+49 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\ipaddr.js is being purged
+50 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\ipaddr.js
+51 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\keygrip is being purged
+52 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\keygrip
+53 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\media-typer is being purged
+54 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\media-typer
+55 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\merge-descriptors is being purged
+56 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\merge-descriptors
+57 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\methods is being purged
+58 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\methods
+59 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\mime is being purged
+60 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\mime
+61 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-db is being purged
+62 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-db
+63 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-types is being purged
+64 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-types
+65 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\ms is being purged
+66 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\ms
+67 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\negotiator is being purged
+68 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\negotiator
+69 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\on-finished is being purged
+70 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\on-finished
+71 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\parseurl is being purged
+72 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\parseurl
+73 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\path-to-regexp is being purged
+74 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\path-to-regexp
+75 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\proxy-addr is being purged
+76 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\proxy-addr
+77 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\qs is being purged
+78 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\qs
+79 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\range-parser is being purged
+80 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\range-parser
+81 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\registry.npmjs.org is being purged
+82 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\registry.npmjs.org
+83 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\send is being purged
+84 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\send
+85 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\serve-static is being purged
+86 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\serve-static
+87 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\setprototypeof is being purged
+88 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\setprototypeof
+89 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\statuses is being purged
+90 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\statuses
+91 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\type-is is being purged
+92 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\type-is
+93 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\underscore is being purged
+94 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\underscore
+95 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\unpipe is being purged
+96 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\unpipe
+97 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\utils-merge is being purged
+98 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\utils-merge
+99 silly gentlyRm C:\Users\Guillaume\AppData\Roaming\npm-cache\vary is being purged
+100 verbose gentlyRm don't care about contents; nuking C:\Users\Guillaume\AppData\Roaming\npm-cache\vary
+101 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\_locks
+102 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\client-sessions
+103 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\array-flatten
+104 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\accepts
+105 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\content-type
+106 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie-signature
+107 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\content-disposition
+108 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\cookie
+109 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\debug
+110 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\cookies
+111 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\destroy
+112 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\depd
+113 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\encodeurl
+114 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\etag
+115 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\ee-first
+116 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\escape-html
+117 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\express
+118 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\finalhandler
+119 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\fresh
+120 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\forwarded
+121 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\inherits
+122 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\keygrip
+123 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\ipaddr.js
+124 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\http-errors
+125 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\merge-descriptors
+126 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\media-typer
+127 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\mime
+128 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\methods
+129 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-db
+130 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\ms
+131 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\mime-types
+132 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\negotiator
+133 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\path-to-regexp
+134 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\parseurl
+135 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\on-finished
+136 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\proxy-addr
+137 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\qs
+138 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\registry.npmjs.org
+139 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\range-parser
+140 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\serve-static
+141 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\send
+142 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\statuses
+143 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\setprototypeof
+144 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\type-is
+145 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\underscore
+146 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\utils-merge
+147 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\unpipe
+148 silly vacuum-fs purging C:\Users\Guillaume\AppData\Roaming\npm-cache\vary
+149 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+150 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+151 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+152 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+153 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+154 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+155 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming\npm-cache
+156 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+157 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+158 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+159 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+160 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+161 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+162 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+163 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+164 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+165 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+166 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+167 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+168 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+169 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+170 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+171 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+172 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+173 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+174 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+175 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+176 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+177 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+178 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+179 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+180 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+181 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+182 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+183 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+184 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+185 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+186 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+187 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+188 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+189 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+190 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+191 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+192 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+193 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+194 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+195 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+196 silly vacuum-fs removing C:\Users\Guillaume\AppData\Roaming\npm-cache
+197 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+198 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+199 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+200 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+201 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+202 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+203 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+204 silly vacuum-fs unable to remove C:\Users\Guillaume\AppData\Roaming\npm-cache due to EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+205 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+206 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+207 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+208 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+209 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+210 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+211 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+212 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+213 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+214 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+215 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+216 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+217 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+218 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+219 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+220 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+221 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+222 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+223 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+224 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+225 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+226 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+227 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+228 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+229 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+230 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+231 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+232 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+233 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+234 silly vacuum-fs quitting because lost the race to remove C:\Users\Guillaume\AppData\Roaming\npm-cache
+235 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming
+236 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming
+237 silly vacuum-fs quitting because other entries in C:\Users\Guillaume\AppData\Roaming
+238 verbose stack Error: EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+238 verbose stack     at Error (native)
+239 verbose cwd d:\github\Chat Socket.IO
+240 error Windows_NT 10.0.14393
+241 error argv "C:\\Program Files\\nodejs\\node.exe" "C:\\Program Files\\nodejs\\node_modules\\npm\\bin\\npm-cli.js" "cache" "clean"
+242 error node v6.9.5
+243 error npm  v3.10.10
+244 error path C:\Users\Guillaume\AppData\Roaming\npm-cache
+245 error code EPERM
+246 error errno -4048
+247 error syscall rmdir
+248 error Error: EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+248 error     at Error (native)
+248 error  { Error: EPERM: operation not permitted, rmdir 'C:\Users\Guillaume\AppData\Roaming\npm-cache'
+248 error     at Error (native)
+248 error   errno: -4048,
+248 error   code: 'EPERM',
+248 error   syscall: 'rmdir',
+248 error   path: 'C:\\Users\\Guillaume\\AppData\\Roaming\\npm-cache' }
+249 error Please try running this command again as root/Administrator.
+250 verbose exit [ -4048, true ]

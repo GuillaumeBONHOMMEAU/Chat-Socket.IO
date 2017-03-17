@@ -1,15 +1,19 @@
 // Connection to socket.io
 var socket = io.connect('http://localhost:8080')
-// user will be an object which will be simplify dev for next features
-var user = {
-  pseudo: ''
-}
+  var user = {
+    pseudo: '',
+    id:''
+  }
+/*socket.on('connect', function() {
+  // user will be an object which will be simplify dev for next features
+})*/
 
       // Update user details
 socket.on('updateClient', function (pUser) {
   user = pUser
 })
 
+      // Update panel details
 socket.on('updateChatList', function (pChatList) {
   var panelTrending = $('#chatList')
   panelTrending.empty()
@@ -19,11 +23,10 @@ socket.on('updateChatList', function (pChatList) {
 
   var panelEnteredRoom = $('#lobbyListing')
   panelEnteredRoom.empty()
-  for (var key in pChatList) {
-    for (var i = 0; i < pChatList[key].length; i++) {
-      if (pChatList[key][i].pseudo === user.pseudo) {
-        panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + key + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
-        break
+  for(var chat in pChatList){
+    for(var chatUser in pChatList[chat]){
+      if (chatUser === user.id) {
+        panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
       }
     }
   }
@@ -31,7 +34,7 @@ socket.on('updateChatList', function (pChatList) {
   var panelUserList = $('#panelUserList')
   panelUserList.empty()
   for (var key in pChatList['The Lobby']) {
-    panel.append('<div class="panel-body">' + key.pseudo + '</div>')
+    panelUserList.append('<div class="panel-body">' + pChatList['The Lobby'][key] + '</div>')
   }
 })
 
@@ -67,8 +70,18 @@ function updateListOpenedRoom () {
 }
 
 $(document).ready(function () {
-        // Show the Modal on load
-  $('#myModal').modal('show')
+        // Show the Modal on load if no pseudo recorded for current user
+  if ( user.pseudo === '') {
+    $('#myModal').modal('show')
+
+        // join form submit
+    $('#btnJoin').click(function () {
+            // Request nickname to send it to server
+      user.pseudo = $('#own').val()
+      socket.emit('newClient', user)
+      $('#myModal').modal('hide')
+    })
+  }
           // Initializes and creates emoji set from sprite sheet
   window.emojiPicker = new EmojiPicker({
     emojiable_selector: '[data-emojiable=true]',
@@ -79,12 +92,4 @@ $(document).ready(function () {
         // You may want to delay this step if you have dynamically created input fields that appear later in the loading process
         // It can be called as many times as necessary; previously converted input fields will not be converted again
   window.emojiPicker.discover()
-
-        // join form submit
-  $('#btnJoin').click(function () {
-          // Request nickname to send it to server
-    user.pseudo = $('#own').val()
-    socket.emit('newClient', user)
-    $('#myModal').modal('hide')
-  })
 })
