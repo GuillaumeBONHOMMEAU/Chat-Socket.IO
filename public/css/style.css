@@ -16,6 +16,10 @@ span.glyphicon::before {
 	margin-left: 5px;
 }
 
+#lobbyListing div.btn-default {
+	box-shadow: 0px 0px 27px 0px #57C6C2;
+}
+
 #chatList div {
 	cursor: pointer;
 }

@@ -23,7 +23,7 @@ socket.on('updateChatList', function (pChatList) {
   for (var chat in pChatList.chats) {
     for (var chatUser in pChatList.chats[chat]) {
       if (pChatList.chats[chat][chatUser] === user.id) {
-        panelEnteredRoom.append('<div class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
+        panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
       }
     }
   }
@@ -68,19 +68,37 @@ function writing (event) {
 
       // Ajoute un message dans la page
 function insereMessage (pPseudo, pMessage) {
-  $('#zone_chat').append('<p><strong>' + pPseudo + '&nbsp;:</strong>&nbsp;' + pMessage + '</p>')
+  var activeLabel = $('#lobbyListing .btn-default')
+  $('#chatZone' + activeLabel.attr('id').substring(9)).append('<p><strong>' + pPseudo + '&nbsp;:</strong>&nbsp;' + pMessage + '</p>')
 }
 
-function joinChat (chatName) {
-  socket.emit('joinChat', chatName)
+function joinChat (pChatName) {
+  socket.emit('joinChat', pChatName)
+
+  var chatName = pChatName.replace(new RegExp(' ', 'g'), '')
+  if (!$('#labelChat_' + chatName).length) {
+    $('#panelChatZone').prepend('<section id="chatZone_' + chatName + '"></section>')
+  }
+
+  selectChat(pChatName)
 }
 
-function leaveChat (chatName) {
-  socket.emit('leaveChat', chatName)
+function leaveChat (pChatName) {
+  socket.emit('leaveChat', pChatName)
+  $('#chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '')).remove()
 }
 
-function updateListOpenedRoom () {
+function selectChat (pChatName) {
+  var oldLabel = $('#lobbyListing .btn-default')
+  oldLabel.removeClass('btn-default')
+  oldLabel.addClass('btn-primary')
 
+  var newLabel = $('#labelChat_' + pChatName.replace(new RegExp(' ', 'g'), ''))
+  newLabel.removeClass('btn-primary')
+  newLabel.addClass('btn-default')
+
+  $('#panelChatZone section').css('display', 'none')
+  $('#chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '')).css('display', 'block')
 }
 
 $(document).ready(function () {
@@ -96,6 +114,7 @@ $(document).ready(function () {
       $('#myModal').modal('hide')
     })
   }
+
           // Initializes and creates emoji set from sprite sheet
   window.emojiPicker = new EmojiPicker({
     emojiable_selector: '[data-emojiable=true]',
