@@ -23,7 +23,7 @@ socket.on('updateChatList', function (pChatList) {
   for (var chat in pChatList.chats) {
     for (var chatUser in pChatList.chats[chat]) {
       if (pChatList.chats[chat][chatUser] === user.id) {
-        panelEnteredRoom.append('<div class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\''+chat+'\')"></span></div>')
+        panelEnteredRoom.append('<div class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
       }
     }
   }

@@ -18,6 +18,7 @@
   , "url" : "https://github.com/Doshibu/Chat-Socket.IO"
   },
   "scripts": {
-    "std": "standard && node my-tests.js"
+    "test": "standard && node my-tests.js",
+    "std": "standard --fix"
   }
 }

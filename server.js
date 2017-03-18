@@ -2,18 +2,15 @@ var express = require('express')
 var app = express()
 var server = require('http').createServer(app)
 var io = require('socket.io').listen(server)
-var ent = require('ent') // Permet de bloquer les caractères HTML (sécurité équivalente à htmlentities en PHP)
-var fs = require('fs')
 var rd = require('./randpass')
-var session = require('client-sessions')
-var s
-require("jsdom").env("", function(err, window) {
-    if (err) {
-        console.error(err);
-        return;
-    }
- 
-    $ = require("jquery")(window);
+var $
+require('jsdom').env('', function (err, window) {
+  if (err) {
+    console.error(err)
+    return
+  }
+
+  $ = require('jquery')(window)
 })
 var port = process.env.PORT || 8080
 
@@ -21,13 +18,6 @@ var port = process.env.PORT || 8080
 server.listen(port, function () {
   console.log('Server listening at port %d', port)
 })
-
-app.use(session({
-  cookieName: 'session',
-  secret: 'ahah',
-  duration: 30 * 60 * 1000,
-  activeDuration: 5 * 60 * 1000
-}))
 
 // Load index.html page
 app.get('/', function (pReq, pRes) {
@@ -54,7 +44,7 @@ var chatObject = {
     pListChat.forEach(function (chat) {
       var isPresent = false
       chatObject.chats[chat].forEach(function (userIdCheck) {
-        if (userIdCheck == pId) {
+        if (userIdCheck === pId) {
           isPresent = true
         }
       })
@@ -63,19 +53,16 @@ var chatObject = {
       }
     })
   },
-  userLeave: function(pId, pListChat) {
-    pListChat.forEach(function(chat) {
-      chatObject.chats[chat].splice($.inArray(pId, chat),1);
+  userLeave: function (pId, pListChat) {
+    pListChat.forEach(function (chat) {
+      chatObject.chats[chat].splice($.inArray(pId, chat), 1)
     })
   },
   removeUserById: function (pId) {
-    for (lobby in this.chats) {
-      for (user in lobby) {
-        if (user.id === pId) {
-          list.push(user)
-        }
-      }
-    }
+    chatObject.users.splice($.inArray(this.getUserById(pId), chatObject.users), 1)
+    chatObject.chats.forEach(function (chat) {
+      chatObject.chats[chat].splice($.inArray(pId, chatObject.chats[chat]), 1)
+    })
   },
   getPseudoListByChat: function () {
     var conn = []
@@ -85,7 +72,7 @@ var chatObject = {
     return conn
   },
   getUserById: function (pId) {
-    var r = ''
+    var r
     this.users.forEach(function (user) {
       if (user.id === pId) {
         r = user
@@ -94,8 +81,6 @@ var chatObject = {
     return r
   }
 }
-
-var sessionSaved = []
 
 io.sockets.on('connection', function (pSocket) {
     // As soon as we get a new client name, we stock it and inform others by broadcast
@@ -121,7 +106,7 @@ io.sockets.on('connection', function (pSocket) {
     pSocket.broadcast.emit('updateChatList', chatObject)
   })
 
-  pSocket.on('leaveChat', function(pChatRoom) {
+  pSocket.on('leaveChat', function (pChatRoom) {
     chatObject.userLeave(pSocket.id, [pChatRoom])
     pSocket.emit('updateChatList', chatObject)
     pSocket.broadcast.emit('updateChatList', chatObject)
@@ -134,12 +119,6 @@ io.sockets.on('connection', function (pSocket) {
       message: message
     })
   })
-
-  /* pSocket.on('disconnect',function(){
-    var user = chatObject.getUserById(pSocket.id);
-    chatObject.removeUserById(pSocket.id);
-    console.log(user.pseudo +' disconnected')
-  }) */
 })
 
 server.listen(8080)
