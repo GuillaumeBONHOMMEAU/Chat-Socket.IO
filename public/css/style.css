@@ -11,9 +11,13 @@ span.glyphicon::before {
 	padding: 17px 0;
 }
 
-#lobbyListing button {
+#lobbyListing div {
 	margin-right: 5px;
 	margin-left: 5px;
+}
+
+#chatList div {
+	cursor: pointer;
 }
 
 #panelUserList

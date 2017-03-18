@@ -4,9 +4,6 @@ var user = {
   pseudo: '',
   id: ''
 }
-/* socket.on('connect', function() {
-  // user will be an object which will be simplify dev for next features
-}) */
 
       // Update user details
 socket.on('updateClient', function (pUser) {
@@ -26,7 +23,7 @@ socket.on('updateChatList', function (pChatList) {
   for (var chat in pChatList.chats) {
     for (var chatUser in pChatList.chats[chat]) {
       if (pChatList.chats[chat][chatUser] === user.id) {
-        panelEnteredRoom.append('<button type="button" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove"></span></button>')
+        panelEnteredRoom.append('<div class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\''+chat+'\')"></span></div>')
       }
     }
   }
@@ -75,8 +72,12 @@ function insereMessage (pPseudo, pMessage) {
 }
 
 function joinChat (chatName) {
-  alert('ha')
   socket.emit('joinChat', chatName)
+}
+
+function leaveChat (chatName) {
+  alert('hey')
+  socket.emit('leaveChat', chatName)
 }
 
 function updateListOpenedRoom () {

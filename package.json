@@ -4,14 +4,20 @@
   "dependencies": {
     "express": "~3.3.4",
     "socket.io": "~1.2.1",
-    "ent": "~0.1.0"
+    "ent": "~0.1.0",
+    "jsdom": "~9.12.0",
+    "jquery": "=>3"
   },
   "author": "Guillaume BONHOMMEAU <guillaume.bonhommeau@viacesi.fr>",
   "description": "Make a ergonomic chat with many features",
   "devDependencies": {
     "standard": "*"
   },
+  "repository" : { 
+    "type" : "git"
+  , "url" : "https://github.com/Doshibu/Chat-Socket.IO"
+  },
   "scripts": {
-    "test": "standard && node my-tests.js"
+    "std": "standard && node my-tests.js"
   }
 }
