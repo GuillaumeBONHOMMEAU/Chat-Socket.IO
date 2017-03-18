@@ -2,7 +2,12 @@ var express = require('express')
 var app = express()
 var server = require('http').createServer(app)
 var io = require('socket.io').listen(server)
-var rd = require('./randpass')
+var rd = require('./randpass') // For generated pseudo
+/*
+  For jQuery to work in Node, a window with a document is required. Since no such window exists natively in Node,
+  one can be mocked by tools such as jsdom. This can be useful for testing purposes.
+  Reference : https://www.npmjs.com/package/jquery
+*/
 var $
 require('jsdom').env('', function (err, window) {
   if (err) {
@@ -27,12 +32,17 @@ app.get('/', function (pReq, pRes) {
 // Set the default path root of internal ressources to /public
 app.use(express.static(__dirname + '/public'))
 
-app.use(function (req, res, next) {
-  console.log(req.session.id)
-})
-
+// Anonymous object storing main data and always sent to update the client interfaces
 var chatObject = {
+  /*
+    - users : array()
+        Save each "user object" existing in the whole application
+  */
   'users': [],
+  /*
+    - chats : Anonymous object
+        Save each user's ID existing in each chat
+  */
   'chats': {
     'The Lobby': [],
     'Supernatural': [],
@@ -40,6 +50,11 @@ var chatObject = {
     'Frontier': [],
     'Shooter': []
   },
+  /**
+    @description : Add a user to one or several chat
+    @param pId int :  User ID joining chat
+    @param pListChat array() : Chat Names
+  */
   userJoin: function (pId, pListChat) {
     pListChat.forEach(function (chat) {
       var isPresent = false
@@ -53,57 +68,76 @@ var chatObject = {
       }
     })
   },
+  /*
+    @description : Remove a user from one or several chat
+    @param pId int :  User ID leaving chat
+    @param pListChat array() : Chat Names
+  */
   userLeave: function (pId, pListChat) {
     pListChat.forEach(function (chat) {
       chatObject.chats[chat].splice($.inArray(pId, chat), 1)
     })
   },
+  /*
+    @description : Remove user from all chat, when user reload or close page
+    @param pId int :  User ID who left
+  */
   removeUserById: function (pId) {
     chatObject.users.splice($.inArray(this.getUserById(pId), chatObject.users), 1)
-    for(var chat in chatObject.chats) {
+    for (var chat in chatObject.chats) {
       chatObject.chats[chat].splice($.inArray(pId, chatObject.chats[chat]), 1)
     }
   },
+  /*
+    @description : Get a user object providing only his id
+    @param pId int :  User ID
+    @return user : object
+  */
   getUserById: function (pId) {
-    var r
-    this.users.forEach(function (user) {
-      if (user.id === pId) {
-        r = user
+    var user
+    this.users.forEach(function (element) {
+      if (element.id === pId) {
+        user = element
       }
     })
-    return r
+    return user
   }
 }
 
+// New socket
 io.sockets.on('connection', function (pSocket) {
-    // As soon as we get a new client name, we stock it and inform others by broadcast
+    // As soon as a another client connect
   pSocket.on('newClient', function (pUser) {
-    pUser.id = pSocket.id
+    pUser.id = pSocket.id // Set the socket id as the new user id (he'll keep it the whole life cycle)
+    // If no valid pseudo, we generate one
     if (pUser.pseudo === '' || pUser.pseudo === null) {
       pUser.pseudo = rd.randpass(8)
     }
-    pSocket.emit('updateClient', pUser)
-    chatObject.users.push(pUser)
-    chatObject.userJoin(pUser.id, ['The Lobby'])
-    pSocket.emit('updateChatList', chatObject)
-    pSocket.broadcast.emit('updateChatList', chatObject)
-    pSocket.broadcast.emit('newClient', pUser.pseudo)
+    pSocket.emit('updateClient', pUser) // Update the senter's user object
+    chatObject.users.push(pUser) // Save the new user object
+    chatObject.userJoin(pUser.id, ['The Lobby']) // Autojoin "The Lobby" chat
+    // Update interfaces information depending the new user arrival
+    pSocket.emit('updateChatList', chatObject) // Update sender
+    pSocket.broadcast.emit('updateChatList', chatObject) // Update all other sockets
+    pSocket.broadcast.emit('newClient', pUser.pseudo) // All other sockets display message for the new arrival "user join the chat ..."
     console.log('### A new user joined ... His name is ' + pUser.pseudo)
   })
 
+  // Add a user to a chat
   pSocket.on('joinChat', function (pChatRoom) {
     chatObject.userJoin(pSocket.id, [pChatRoom])
     pSocket.emit('updateChatList', chatObject)
     pSocket.broadcast.emit('updateChatList', chatObject)
   })
 
+  // Remove a user from a chat
   pSocket.on('leaveChat', function (pChatRoom) {
     chatObject.userLeave(pSocket.id, [pChatRoom])
     pSocket.emit('updateChatList', chatObject)
     pSocket.broadcast.emit('updateChatList', chatObject)
   })
 
-    // As soon as we get message, we get pseudo and send message to others by broadcast
+  // As soon as we get message, we get pseudo and send message to others by broadcast
   pSocket.on('newMessage', function (message) {
     pSocket.broadcast.emit('newMessage', {
       pseudo: chatObject.getUserById(pSocket.id).pseudo,
@@ -111,7 +145,8 @@ io.sockets.on('connection', function (pSocket) {
     })
   })
 
-  pSocket.on('disconnect', function(){
+  // Close or Reload page, automatic leave each chat previously joined
+  pSocket.on('disconnect', function () {
     chatObject.removeUserById(pSocket.id)
     pSocket.broadcast.emit('updateChatList', chatObject)
   })
