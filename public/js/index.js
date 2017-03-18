@@ -76,7 +76,6 @@ function joinChat (chatName) {
 }
 
 function leaveChat (chatName) {
-  alert('hey')
   socket.emit('leaveChat', chatName)
 }
 

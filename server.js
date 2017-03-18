@@ -60,16 +60,9 @@ var chatObject = {
   },
   removeUserById: function (pId) {
     chatObject.users.splice($.inArray(this.getUserById(pId), chatObject.users), 1)
-    chatObject.chats.forEach(function (chat) {
+    for(var chat in chatObject.chats) {
       chatObject.chats[chat].splice($.inArray(pId, chatObject.chats[chat]), 1)
-    })
-  },
-  getPseudoListByChat: function () {
-    var conn = []
-    this.chat.forEach(function (data) {
-      conn.push(data.pseudo)
-    })
-    return conn
+    }
   },
   getUserById: function (pId) {
     var r
@@ -88,7 +81,6 @@ io.sockets.on('connection', function (pSocket) {
     pUser.id = pSocket.id
     if (pUser.pseudo === '' || pUser.pseudo === null) {
       pUser.pseudo = rd.randpass(8)
-      // client will update details to be compliant
     }
     pSocket.emit('updateClient', pUser)
     chatObject.users.push(pUser)
@@ -97,7 +89,6 @@ io.sockets.on('connection', function (pSocket) {
     pSocket.broadcast.emit('updateChatList', chatObject)
     pSocket.broadcast.emit('newClient', pUser.pseudo)
     console.log('### A new user joined ... His name is ' + pUser.pseudo)
-    // chatList.getPseudoList()
   })
 
   pSocket.on('joinChat', function (pChatRoom) {
@@ -118,6 +109,11 @@ io.sockets.on('connection', function (pSocket) {
       pseudo: chatObject.getUserById(pSocket.id).pseudo,
       message: message
     })
+  })
+
+  pSocket.on('disconnect', function(){
+    chatObject.removeUserById(pSocket.id)
+    pSocket.broadcast.emit('updateChatList', chatObject)
   })
 })
 
