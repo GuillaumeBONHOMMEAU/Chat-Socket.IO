@@ -4,30 +4,78 @@ var user = {
   pseudo: '',
   id: ''
 }
+var hasAutojoined = false
+var chatToJoin = null
 
       // Update user details
 socket.on('updateClient', function (pUser) {
   user = pUser
 })
 
-      // Update panel details
+      // Update panels details
 socket.on('updateChatList', function (pChatList) {
+  updatePanelTrending(pChatList)
+  updateLobbyListing(pChatList)
+  updatePanelUserList(pChatList)
+})
+
+      // Display while receive message
+socket.on('newMessage', function (pData) {
+  insereMessage(pData.pseudo, pData.message)
+})
+
+      // Log while connecting
+socket.on('newClient', function (pPseudo) {
+  $('#zoneChat_TheLobby').append('<p class="alert alert-info"><em>' + pPseudo + ' a rejoint le Chat !</em></p>')
+})
+
+      // Form sending then printing message
+function writing (event) {
+        // If key enter pressed
+  if (event.which === 13 || event.keyCode === 13) {
+    var message = document.getElementById('message').parentNode.textContent
+    socket.emit('newMessage', message) // Broadcast emit
+
+    var activeLabel = $('#lobbyListing .btn-default')
+    var labelId = activeLabel.attr('id') || 'chatZone_TheLobby'
+    $('#chatZone' + labelId.substring(9)).append('<p><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
+
+    document.getElementsByClassName('emoji-wysiwyg-editor')['message'].textContent = ''
+    return false
+  }
+}
+
+function updatePanelTrending (pChatList) {
   var panelTrending = $('#chatList')
   panelTrending.empty()
   for (var chat in pChatList.chats) {
-    panelTrending.append('<div class="well" onclick="joinChat(\'' + chat + '\')">' + chat + '  <span class="label label-default"> ' + pChatList.chats[chat].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
+    panelTrending.append('<div class="well" onclick="joinChat(\'' + chat + '\')">' + chat +
+      '  <span class="label label-default"> ' + pChatList.chats[chat].length + ' <span class="glyphicon glyphicon-user"></span></span></div>')
   }
+}
 
+function updateLobbyListing (pChatList) {
   var panelEnteredRoom = $('#lobbyListing')
   panelEnteredRoom.empty()
-  for (var chat in pChatList.chats) {
-    for (var chatUser in pChatList.chats[chat]) {
-      if (pChatList.chats[chat][chatUser] === user.id) {
-        panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="btn btn-primary">' + chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
+
+  if (!hasAutojoined) {
+    panelEnteredRoom.append('<div id="labelChat_TheLobby' + '" onclick="selectChat(\'The Lobby\')" class="btn btn-default">' +
+      'The Lobby &nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'The Lobby\')"></span></div>')
+    hasAutojoined = true
+  } else {
+    for (var chat in pChatList.chats) {
+      for (var chatUser in pChatList.chats[chat]) {
+        if (pChatList.chats[chat][chatUser] === user.id) {
+          var divClass = chatToJoin === chat ? 'btn btn-default' : 'btn btn-primary'
+          panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="' + divClass + '">' +
+            chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
+        }
       }
     }
   }
+}
 
+function updatePanelUserList (pChatList) {
   var panelUserList = $('#panelUserList')
   panelUserList.empty()
   for (var userId in pChatList.chats['The Lobby']) {
@@ -42,34 +90,6 @@ socket.on('updateChatList', function (pChatList) {
     }
     panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '</div>')
   }
-})
-
-      // Display while receive message
-socket.on('newMessage', function (pData) {
-  insereMessage(pData.pseudo, pData.message)
-})
-
-      // Log while connecting
-socket.on('newClient', function (pPseudo) {
-  $('#zone_chat').append('<p class="alert alert-info"><em>' + pPseudo + ' a rejoint le Chat !</em></p>')
-})
-
-      // Form sending then printing message
-function writing (event) {
-        // If key enter pressed
-  if (event.which === 13 || event.keyCode === 13) {
-    var message = document.getElementById('message').parentNode.textContent
-    socket.emit('newMessage', message) // Broadcast emit
-    insereMessage(user.pseudo, message) // Display message
-    document.getElementsByClassName('emoji-wysiwyg-editor')['message'].textContent = ''
-    return false
-  }
-}
-
-      // Ajoute un message dans la page
-function insereMessage (pPseudo, pMessage) {
-  var activeLabel = $('#lobbyListing .btn-default')
-  $('#chatZone' + activeLabel.attr('id').substring(9)).append('<p><strong>' + pPseudo + '&nbsp;:</strong>&nbsp;' + pMessage + '</p>')
 }
 
 function joinChat (pChatName) {
@@ -79,7 +99,7 @@ function joinChat (pChatName) {
   if (!$('#labelChat_' + chatName).length) {
     $('#panelChatZone').prepend('<section id="chatZone_' + chatName + '"></section>')
   }
-
+  chatToJoin = pChatName
   selectChat(pChatName)
 }
 
