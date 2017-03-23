@@ -21,7 +21,10 @@ socket.on('updateChatList', function (pChatList) {
 
       // Display while receive message
 socket.on('newMessage', function (pData) {
-  insereMessage(pData.pseudo, pData.message)
+  var labelChatConcerned = $('.btn').filter(function(index) { return $(this).text() === pData.chat; })
+  if(labelChatConcerned === null || labelChatConcerned === 'undefined') {
+    $('#chatZone_' + pData.chat.replace(new RegExp(' ', 'g'), '')).append('<p><strong>' + pData.pseudo + '&nbsp;:</strong>&nbsp;' + pData.message + '</p>')
+  }
 })
 
       // Log while connecting
@@ -34,7 +37,7 @@ function writing (event) {
         // If key enter pressed
   if (event.which === 13 || event.keyCode === 13) {
     var message = document.getElementById('message').parentNode.textContent
-    socket.emit('newMessage', message) // Broadcast emit
+    socket.emit('newMessage', {'message': message, 'chat': $('.btn-default').text()}) // Broadcast emit
 
     var activeLabel = $('#lobbyListing .btn-default')
     var labelId = activeLabel.attr('id') || 'chatZone_TheLobby'
@@ -68,7 +71,7 @@ function updateLobbyListing (pChatList) {
         if (pChatList.chats[chat][chatUser] === user.id) {
           var divClass = chatToJoin === chat ? 'btn btn-default' : 'btn btn-primary'
           panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="' + divClass + '">' +
-            chat + '&nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
+            chat + '<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
         }
       }
     }
@@ -104,8 +107,14 @@ function joinChat (pChatName) {
 }
 
 function leaveChat (pChatName) {
-  socket.emit('leaveChat', pChatName)
+  /*if($('#lobbyListing .btn-default').text() === pChatName) {
+    var lastChat = $('#lobbyListing .btn-primary').last()
+    lastChat.removeClass('btn-primary')
+    lastChat.addClass('btn-default')
+    chatToJoin = lastChat.text()
+  }*/
   $('#chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '')).remove()
+  socket.emit('leaveChat', pChatName)
 }
 
 function selectChat (pChatName) {

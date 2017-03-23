@@ -138,10 +138,11 @@ io.sockets.on('connection', function (pSocket) {
   })
 
   // As soon as we get message, we get pseudo and send message to others by broadcast
-  pSocket.on('newMessage', function (message) {
+  pSocket.on('newMessage', function (pData) {
     pSocket.broadcast.emit('newMessage', {
       pseudo: chatObject.getUserById(pSocket.id).pseudo,
-      message: message
+      message: pData.message,
+      chat: pData.chat
     })
   })
 

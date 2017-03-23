@@ -1,3 +1,24 @@
+html {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	width: 100%;
+	height: 100%;
+}
+
+#main {
+	background: url('../img/background.jpg') no-repeat center center / 100% 100%;
+	background-size:cover; 
+	background-attachment:fixed;
+	height: 100%;
+	width: 100%;
+	margin: 0;
+	padding: 0;
+	display: flex;
+}
+
 #zone_chat strong {
    	padding: 2px;
 }
@@ -17,7 +38,11 @@ span.glyphicon::before {
 }
 
 #lobbyListing div.btn-default {
-	box-shadow: 0px 0px 27px 0px #57C6C2;
+	box-shadow: 0px 0px 27px 0px #F38A1499;
+}
+
+#lobbyListing span {
+	margin-left: 5px;
 }
 
 #chatList div {
