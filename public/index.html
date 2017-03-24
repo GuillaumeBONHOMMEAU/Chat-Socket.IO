@@ -16,63 +16,65 @@
 
 <body>
   <div id="main">
-    <div class="modal fade" id="myModal" role="dialog">
-      <div id="login-overlay" class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-            <h4 class="modal-title" id="myModalLabel">Join chat rooms</h4>
-          </div>
-          <div class="modal-body">
-            <div class="row">
-              <div class="col-xs-12">
-                <div class="form-group">
-                  <label for="own" class="control-label">Your nickname</label>
-                  <input type="text" class="form-control" id="own">
-                  <span class="help-block"></span>
-                  <button type="button" class="btn btn-info btn-block" id="btnJoin">Join</button>
+    <div id="chatContainer" class="col-md-12">
+      <div class="modal fade" id="myModal" role="dialog">
+        <div id="login-overlay" class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+              <h4 class="modal-title" id="myModalLabel">Join chat rooms</h4>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div class="col-xs-12">
+                  <div class="form-group">
+                    <label for="own" class="control-label">Your nickname</label>
+                    <input type="text" class="form-control" id="own">
+                    <span class="help-block"></span>
+                    <button type="button" class="btn btn-info btn-block" id="btnJoin">Join</button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="col-md-2">
-      <button type="button" id="btnStartBroadcast" class="btn btn-primary">Start Broadcasting</button>
-      <div id="panelUserList" class="panel panel-default">
-        <div class="panel-heading">Chat&nbsp;Room&nbsp;User</div>
+      <div class="col-md-2">
+        <button type="button" id="btnStartBroadcast" class="btn btn-primary">Start Broadcasting</button>
+        <div id="panelUserList" class="panel panel-default">
+          <div class="panel-heading">Chat&nbsp;Room&nbsp;User</div>
+        </div>
       </div>
-    </div>
-    <div class="col-md-8">
-      <div class="panel panel-default">
-        <div id="lobbyListing" class="panel-heading lobbyListing">
-        </div>
-        <div id="panelChatZone" class="panel-body">
-          <section id="chatZone_TheLobby"></section>
+      <div class="col-md-8">
+        <div class="panel panel-default">
+          <div id="lobbyListing" class="panel-heading lobbyListing">
+          </div>
+          <div id="panelChatZone" class="panel-body">
+            <section id="chatZone_TheLobby"></section>
 
-          <form action="/" method="post" id="formulaire_chat">
-            <div class="input-group">
-              <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-              <textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
-              placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
-              <!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
-            </div>
-          </form>
+            <form action="/" method="post" id="formulaire_chat">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                <textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
+                placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
+                <!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
+              </div>
+            </form>
+          </div>
+        </div>           
+      </div>
+      <div class="col-md-2">
+        <div class="panel panel-default">
+          <div class="panel-heading">Trending</div>
+          <div id="chatList" class="panel-body"></div>
         </div>
-      </div>           
-    </div>
-    <div class="col-md-2">
-      <div class="panel panel-default">
-        <div class="panel-heading">Trending</div>
-        <div id="chatList" class="panel-body"></div>
       </div>
     </div>
   </div>
 
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
   <!-- Begin emoji-picker JavaScript -->
   <script src="lib/js/nanoscroller.min.js"></script>
