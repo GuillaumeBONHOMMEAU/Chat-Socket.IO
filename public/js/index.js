@@ -58,7 +58,7 @@ function writing (event) {
     var activeLabel = $('#lobbyListing .btn-default')
     var labelId = activeLabel.attr('id') || 'chatZone_TheLobby'
     var colorText = $('input.colorpicker-element').val() != null ? $('input.colorpicker-element').val() : 'black'
-    $('#chatZone' + labelId.substring(9)).append('<p style="color: '+ colorText +'"><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
+    $('#chatZone' + labelId.substring(9)).append('<p style="color: ' + colorText + '"><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
 
     document.getElementsByClassName('emoji-wysiwyg-editor')['message'].textContent = ''
     return false
@@ -88,10 +88,9 @@ function updateLobbyListing (pChatList) {
       for (var chatUser in pChatList.chats[chat]) {
         if (pChatList.chats[chat][chatUser] === user.id) {
           var divClass
-          if(chatToJoin !== null) {
+          if (chatToJoin !== null) {
             divClass = chatToJoin === chat ? 'btn-default' : 'btn-primary'
-          }
-          else if (selectedChat != null && selectedChat === chat) {
+          } else if (selectedChat != null && selectedChat === chat) {
             divClass = 'btn-default'
           }
           divClass = divClass == null ? 'btn-primary' : divClass
@@ -139,7 +138,7 @@ function joinChat (pChatName) {
 }
 
 function leaveChat (pChatName) {
-  if($('#lobbyListing .btn-default').text() === pChatName) {
+  if ($('#lobbyListing .btn-default').text() === pChatName) {
     var lastChat = $('#lobbyListing .btn-primary').last()
     lastChat.removeClass('btn-primary')
     lastChat.addClass('btn-default')
@@ -179,19 +178,18 @@ $(document).ready(function () {
     })
   }
 
-
-  var demo4 = $('.colorpickerplus-dropdown .colorpickerplus-container');
-        demo4.colorpickerembed();
-        demo4.on('changeColor', function(e,color){
-      var el = $('.color-fill-icon', $('#demo4'));
-      if(color==null) {
-        //when select transparent color
-        el.addClass('colorpicker-color');
-      } else {
-        el.removeClass('colorpicker-color');
-            el.css('background-color', color);
-      }
-        });
+  var demo4 = $('.colorpickerplus-dropdown .colorpickerplus-container')
+  demo4.colorpickerembed()
+  demo4.on('changeColor', function (e, color) {
+    var el = $('.color-fill-icon', $('#demo4'))
+    if (color == null) {
+        // when select transparent color
+      el.addClass('colorpicker-color')
+    } else {
+      el.removeClass('colorpicker-color')
+      el.css('background-color', color)
+    }
+  })
 
           // Initializes and creates emoji set from sprite sheet
   window.emojiPicker = new EmojiPicker({
