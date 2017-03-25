@@ -57,7 +57,8 @@ function writing (event) {
 
     var activeLabel = $('#lobbyListing .btn-default')
     var labelId = activeLabel.attr('id') || 'chatZone_TheLobby'
-    $('#chatZone' + labelId.substring(9)).append('<p><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
+    var colorText = $('input.colorpicker-element').val() != null ? $('input.colorpicker-element').val() : 'black'
+    $('#chatZone' + labelId.substring(9)).append('<p style="color: '+ colorText +'"><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
 
     document.getElementsByClassName('emoji-wysiwyg-editor')['message'].textContent = ''
     return false
