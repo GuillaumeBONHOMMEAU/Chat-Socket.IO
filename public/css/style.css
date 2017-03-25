@@ -68,3 +68,7 @@ span.glyphicon::before {
 .panelOpenedChat {
 	background-color: lightyellow;
 }
+
+.colorpickerplus-dropdown button {
+	min-height: 35px;
+}

@@ -6,9 +6,14 @@
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
+  <!-- Begin bootstrap-colorPicker Stylesheets -->
+  <link href="lib/bootstrap-colorPicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
+  <link href="lib/bootstrap-colorPicker/css/bootstrap-colorpicker-plus.min.css" rel="stylesheet">
+  <!-- End bootstrap-colorPicker Stylesheets -->
+
   <!-- Begin emoji-picker Stylesheets -->
-  <link href="lib/css/nanoscroller.css" rel="stylesheet">
-  <link href="lib/css/emoji.css" rel="stylesheet">
+  <link href="lib/emoji-picker/css/nanoscroller.css" rel="stylesheet">
+  <link href="lib/emoji-picker/css/emoji.css" rel="stylesheet">
   <!-- End emoji-picker Stylesheets -->
 
   <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -55,7 +60,16 @@
 
             <form action="/" method="post" id="formulaire_chat">
               <div class="input-group">
-                <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
+                <!--<span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>-->
+                <span class="input-group-btn">
+                  <div class="btn-group colorpickerplus-dropdown" id="demo4">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="glyphicon glyphicon-pencil"></i></button>
+                    <ul class="dropdown-menu">
+                      <li class="disabled"><div class="colorpickerplus-container"></div></li>
+                      <li>...</li>
+                    </ul>
+                  </div>
+                </span>
                 <textarea id="message" onkeypress="return writing(event)" name="message"  class="form-control col-md-9" style="height:50px;" 
                 placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
                 <!--<input type="submit" id="envoi_message" class="btn btn-info col-md-3"  value="Envoyer" />-->
@@ -76,13 +90,18 @@
   <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
   <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
+  <!-- Begin bootstrap-colorPicker JavaScript -->
+  <script src="lib/bootstrap-colorPicker/js/bootstrap-colorpicker.min.js"></script>
+  <script src="lib/bootstrap-colorPicker/js/bootstrap-colorpicker-plus.js"></script>
+  <!-- End bootstrap-colorPicker JavaScript -->
+
   <!-- Begin emoji-picker JavaScript -->
-  <script src="lib/js/nanoscroller.min.js"></script>
-  <script src="lib/js/tether.min.js"></script>
-  <script src="lib/js/config.js"></script>
-  <script src="lib/js/util.js"></script>
-  <script src="lib/js/jquery.emojiarea.js"></script>
-  <script src="lib/js/emoji-picker.js"></script>
+  <script src="lib/emoji-picker/js/nanoscroller.min.js"></script>
+  <script src="lib/emoji-picker/js/tether.min.js"></script>
+  <script src="lib/emoji-picker/js/config.js"></script>
+  <script src="lib/emoji-picker/js/util.js"></script>
+  <script src="lib/emoji-picker/js/jquery.emojiarea.js"></script>
+  <script src="lib/emoji-picker/js/emoji-picker.js"></script>
   <!-- End emoji-picker JavaScript -->
 
   <script src="/socket.io/socket.io.js"></script>

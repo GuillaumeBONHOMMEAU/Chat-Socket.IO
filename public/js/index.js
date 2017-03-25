@@ -75,38 +75,46 @@ function updatePanelTrending (pChatList) {
 
 function updateLobbyListing (pChatList) {
   var panelEnteredRoom = $('#lobbyListing')
+  var selectedChat = $('.btn-default').text()
   panelEnteredRoom.empty()
 
   if (!hasAutojoined) {
     panelEnteredRoom.append('<div id="labelChat_TheLobby' + '" onclick="selectChat(\'The Lobby\')" class="btn btn-default">' +
-      'The Lobby &nbsp;<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'The Lobby\')"></span></div>')
+      'The Lobby<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'The Lobby\')"></span></div>')
     hasAutojoined = true
   } else {
     for (var chat in pChatList.chats) {
       for (var chatUser in pChatList.chats[chat]) {
         if (pChatList.chats[chat][chatUser] === user.id) {
-          var divClass = chatToJoin === chat ? 'btn btn-default' : 'btn btn-primary'
-          panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="' + divClass + '">' +
+          var divClass
+          if(chatToJoin !== null) {
+            divClass = chatToJoin === chat ? 'btn-default' : 'btn-primary'
+          }
+          else if (selectedChat != null && selectedChat === chat) {
+            divClass = 'btn-default'
+          }
+          divClass = divClass == null ? 'btn-primary' : divClass
+          panelEnteredRoom.append('<div id="labelChat_' + chat.replace(new RegExp(' ', 'g'), '') + '" onclick="selectChat(\'' + chat + '\')" class="btn ' + divClass + '">' +
             chat + '<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'' + chat + '\')"></span></div>')
         }
       }
     }
+    chatToJoin = null
   }
 }
 
 function updatePanelUserList (pChatList) {
   var panelUserList = $('#panelUserList')
+  var selectedChat = $('.btn-default').text() != null ? $('.btn-default').text() : 'The Lobby'
   panelUserList.empty()
-  for (var userId in pChatList.chats['The Lobby']) {
+
+  for (var userId in pChatList.chats[selectedChat]) {
     var lUser = ''
     pChatList.users.forEach(function (element) {
       if (element.id === pChatList.chats['The Lobby'][userId]) {
         lUser = element
       }
     })
-    if (lUser.pseudo === null || lUser.pseudo === 'undefined') {
-      lUser.pseudo = 'Visiteur'
-    }
     panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '</div>')
   }
 }
@@ -130,12 +138,12 @@ function joinChat (pChatName) {
 }
 
 function leaveChat (pChatName) {
-  /* if($('#lobbyListing .btn-default').text() === pChatName) {
+  if($('#lobbyListing .btn-default').text() === pChatName) {
     var lastChat = $('#lobbyListing .btn-primary').last()
     lastChat.removeClass('btn-primary')
     lastChat.addClass('btn-default')
     chatToJoin = lastChat.text()
-  } */
+  }
 
   user.chatJoined.splice($.inArray(pChatName, user.chatJoined), 1)
   socket.emit('leaveChat', pChatName)
@@ -169,6 +177,20 @@ $(document).ready(function () {
       $('#myModal').modal('hide')
     })
   }
+
+
+  var demo4 = $('.colorpickerplus-dropdown .colorpickerplus-container');
+        demo4.colorpickerembed();
+        demo4.on('changeColor', function(e,color){
+      var el = $('.color-fill-icon', $('#demo4'));
+      if(color==null) {
+        //when select transparent color
+        el.addClass('colorpicker-color');
+      } else {
+        el.removeClass('colorpicker-color');
+            el.css('background-color', color);
+      }
+        });
 
           // Initializes and creates emoji set from sprite sheet
   window.emojiPicker = new EmojiPicker({
