@@ -31,6 +31,8 @@
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
+  var GLOBAL_ASSET_PATH = 'lib/emoji-picker/img'
+
   /*
    * ! MODIFICATION START Options 'spritesheetPath', 'spritesheetDimens',
    * 'iconSize' added by Andre Staltz.
@@ -254,10 +256,10 @@
     var row = emoji[1]
     var column = emoji[2]
     var name = emoji[3]
-    // var filename = $.emojiarea.assetsPath + '/emoji_spritesheet_!.png'
-    var filename = 'lib/emoji-picker/img/emoji_spritesheet_!.png'
-    // var blankGifPath = $.emojiarea.assetsPath + '/blank.gif'
-    var blankGifPath = 'lib/emoji-picker/img/blank.gif'
+    var filename = GLOBAL_ASSET_PATH + '/emoji_spritesheet_!.png'
+    // var filename = 'lib/emoji-picker/img/emoji_spritesheet_!.png'
+    var blankGifPath = GLOBAL_ASSET_PATH + '/blank.gif'
+    // var blankGifPath = 'lib/emoji-picker/img/blank.gif'
     var iconSize = menu && Config.Mobile ? 26 : $.emojiarea.iconSize
     var xoffset = -(iconSize * column)
     var yoffset = -(iconSize * row)

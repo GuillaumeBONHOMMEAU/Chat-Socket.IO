@@ -22,7 +22,7 @@ socket.on('updateChatList', function (pChatList) {
 
       // Display while receive message
 socket.on('newMessage', function (pData) {
-  alert('newMessage : ' + pData.chat + ' | ' + pData.pseudo + ' | ' + pData.message)
+  // alert('newMessage : ' + pData.chat + ' | ' + pData.pseudo + ' | ' + pData.message)
   var labelChatConcerned = $('.btn').filter(function (index) { return $(this).text() === pData.chat })
   if (labelChatConcerned != null) {
     $('#chatZone_' + pData.chat.replace(new RegExp(' ', 'g'), '')).append('<p><strong>' + pData.pseudo + '&nbsp;:</strong>&nbsp;' + pData.message + '</p>')
@@ -52,13 +52,13 @@ socket.on('noticeUserLeftRoom', function (pData) {
 function writing (event) {
         // If key enter pressed
   if (event.which === 13 || event.keyCode === 13) {
-    var message = document.getElementById('message').parentNode.textContent
-    socket.emit('newMessage', {'message': message, 'chat': $('.btn-default').text()}) // Broadcast emit
+    var message = $('#formulaire_chat div.emoji-wysiwyg-editor').text()
+    socket.emit('newMessage', {'message': message, 'chat': $('#lobbyListing .btn-default').text()}) // Broadcast emit
 
     var activeLabel = $('#lobbyListing .btn-default')
     var labelId = activeLabel.attr('id') || 'chatZone_TheLobby'
     var colorText = $('input.colorpicker-element').val() != null ? $('input.colorpicker-element').val() : 'black'
-    $('#chatZone' + labelId.substring(9)).append('<p style="color: ' + colorText + '"><strong>' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
+    $('#chatZone' + labelId.substring(9)).append('<p style="color: ' + colorText + '"><strong style="color: #333">' + user.pseudo + '&nbsp;:</strong>&nbsp;' + message + '</p>')
 
     document.getElementsByClassName('emoji-wysiwyg-editor')['message'].textContent = ''
     return false
@@ -76,12 +76,13 @@ function updatePanelTrending (pChatList) {
 
 function updateLobbyListing (pChatList) {
   var panelEnteredRoom = $('#lobbyListing')
-  var selectedChat = $('.btn-default').text()
+  var selectedChat = $('#lobbyListing .btn-default').text()
   panelEnteredRoom.empty()
 
   if (!hasAutojoined) {
     panelEnteredRoom.append('<div id="labelChat_TheLobby' + '" onclick="selectChat(\'The Lobby\')" class="btn btn-default">' +
       'The Lobby<span class="glyphicon glyphicon-remove" onclick="leaveChat(\'The Lobby\')"></span></div>')
+    // joinChat('The Lobby')
     hasAutojoined = true
   } else {
     for (var chat in pChatList.chats) {
@@ -105,7 +106,8 @@ function updateLobbyListing (pChatList) {
 
 function updatePanelUserList (pChatList) {
   var panelUserList = $('#panelUserList')
-  var selectedChat = $('.btn-default').text() != null ? $('.btn-default').text() : 'The Lobby'
+  var selectedChat = $('#lobbyListing .btn-default').text() != null ? $('#lobbyListing .btn-default').text() : 'The Lobby'
+  // alert(selectedChat)
   panelUserList.empty()
 
   for (var userId in pChatList.chats[selectedChat]) {
@@ -129,8 +131,8 @@ function joinChat (pChatName) {
 
   if (isChatJoined === false) {
     user.chatJoined.push(pChatName)
-    socket.emit('joinChat', pChatName)
     $('#panelChatZone').prepend('<section id="chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '') + '"></section>')
+    socket.emit('joinChat', pChatName)
   }
 
   chatToJoin = pChatName
@@ -140,15 +142,14 @@ function joinChat (pChatName) {
 function leaveChat (pChatName) {
   if ($('#lobbyListing .btn-default').text() === pChatName) {
     var lastChat = $('#lobbyListing .btn-primary').last()
-    lastChat.removeClass('btn-primary')
-    lastChat.addClass('btn-default')
     chatToJoin = lastChat.text()
+  } else {
+    chatToJoin = $('#lobbyListing .btn-default').text()
   }
 
   user.chatJoined.splice($.inArray(pChatName, user.chatJoined), 1)
-  socket.emit('leaveChat', pChatName)
-
   $('#chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '')).remove()
+  socket.emit('leaveChat', pChatName)
 }
 
 function selectChat (pChatName) {

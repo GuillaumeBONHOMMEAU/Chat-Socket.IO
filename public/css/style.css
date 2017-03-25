@@ -72,3 +72,7 @@ span.glyphicon::before {
 .colorpickerplus-dropdown button {
 	min-height: 35px;
 }
+
+#demo4 ul {
+	padding: 0;
+}
