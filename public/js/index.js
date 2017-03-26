@@ -119,7 +119,7 @@ function updatePanelUserList (pChatList) {
       }
     })
     var country = 'fr'
-    /*$.ajax({
+    /* $.ajax({
       url: 'http://ipinfo.io/'+ lUser.ip +'/json',
       type: 'GET',
       success: function(json)
@@ -131,9 +131,10 @@ function updatePanelUserList (pChatList) {
         country = 'fr'
       }
     })
-    alert(country)*/
-    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + 
-      '<img src="../lib/flags/blank.gif" class="flag flag-'+ country.toLowerCase() +'" alt="Country Flag - '+ country +'" title="Country Flag - '+ country +'" /></div>')
+    alert(country) */
+    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo +
+      '<img src="../lib/flags/blank.gif" class="flag flag-' + country.toLowerCase() + '" alt="Country Flag - ' + country + '" title="Country Flag - ' + country + '" />' +
+      '<span class="glyphicon glyphicon-eye-close"></span><span class="glyphicon glyphicon-facetime-video"></span></div>')
   }
 }
 
