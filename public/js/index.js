@@ -183,6 +183,8 @@ function selectChat (pChatName) {
 }
 
 $(document).ready(function () {
+  var LOCALSTREAM
+
         // Show the Modal on load if no pseudo recorded for current user
   if (user.pseudo === '') {
     $('#myModal').modal('show')
@@ -198,19 +200,33 @@ $(document).ready(function () {
 
   // Implementation of video broadcast : https://davidwalsh.name/browser-camera
   // Get access to the camera!
-  $('#btnStartBroadcast').click(function () {
-    if (!$('video.userBroadcast').length) {
-      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-        $('#videoLocator').append('<video id="video" class="userBroadcast" autoplay></video>')
-          // Grab elements, create settings, etc.
-        var video = document.getElementById('video')
+  $('.btnBroadcast').click(function () {
+    if ($(this).attr('id') === 'btnStartBroadcast') {
+      if (!$('video.userBroadcast').length) {
+        if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+          $('#videoLocator').append('<video id="video" class="userBroadcast" autoplay></video>')
+            // Grab elements, create settings, etc.
+          var video = document.getElementById('video')
 
-          // Not adding `{ audio: true }` since we only want video now
-        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
-          video.src = window.URL.createObjectURL(stream)
-          video.play()
-        })
+            // Not adding `{ audio: true }` since we only want video now
+          navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+            LOCALSTREAM = stream
+            video.src = window.URL.createObjectURL(stream)
+            video.play()
+          })
+
+          $(this).attr('id', 'btnStopBroadcast')
+          $(this).removeClass('btn-primary').addClass('btn-danger')
+          $(this).text('End Broascasting')
+        }
       }
+    } else if ($(this).attr('id') === 'btnStopBroadcast') {
+      $('video.userBroadcast').fadeOut('slow')
+      LOCALSTREAM.getTracks()[0].stop()
+
+      $(this).attr('id', 'btnStartBroadcast')
+      $(this).removeClass('btn-danger').addClass('btn-primary')
+      $(this).text('Start Broascasting')
     }
   })
 

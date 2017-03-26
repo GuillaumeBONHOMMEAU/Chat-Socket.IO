@@ -31,7 +31,7 @@ span.glyphicon::before {
 	font-size: 13px;
 }
 
-#btnStartBroadcast {
+.btnBroadcast {
 	width: 100%;
 	padding: 17px 0;
 }
