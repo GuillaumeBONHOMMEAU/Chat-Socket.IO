@@ -109,7 +109,7 @@ function updatePanelUserList (pChatList) {
   var panelUserList = $('#panelUserList')
   var selectedChat = $('#lobbyListing .btn-default').text() != null ? $('#lobbyListing .btn-default').text() : 'The Lobby'
   // alert(selectedChat)
-  panelUserList.empty()
+  $('#panelUserList .panel-body').remove()
 
   for (var userId in pChatList.chats[selectedChat]) {
     var lUser = ''
@@ -132,7 +132,8 @@ function updatePanelUserList (pChatList) {
       }
     })
     alert(country)*/
-    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '<img src="../lib/flags/blank.gif" class="flag flag-'+ country.toLowerCase() +'" alt="Country Flag - '+ country +'" /></div>')
+    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + 
+      '<img src="../lib/flags/blank.gif" class="flag flag-'+ country.toLowerCase() +'" alt="Country Flag - '+ country +'" title="Country Flag - '+ country +'" /></div>')
   }
 }
 
