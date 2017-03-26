@@ -70,6 +70,12 @@ span.glyphicon::before {
 	margin-left: 5px;
 }
 
+video.userBroadcast {
+	width: 200px;
+	height: 200px;
+	border-radius: 4px;
+}
+
 .panelOpenedChat {
 	background-color: lightyellow;
 }
