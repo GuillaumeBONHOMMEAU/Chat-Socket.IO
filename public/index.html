@@ -3,21 +3,44 @@
 <head>
   <meta charset="utf-8" />
   <title>Chat Socket.IO</title>
+  <!-- Begin favicon reference -->
+  <link rel="apple-touch-icon" sizes="57x57" href="img/favicon/apple-icon-57x57.png">
+  <link rel="apple-touch-icon" sizes="60x60" href="img/favicon/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="img/favicon/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="img/favicon/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="img/favicon/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="img/favicon/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="img/favicon/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="img/favicon/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="img/favicon/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="img/favicon/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="img/favicon/favicon-16x16.png">
+  <link rel="manifest" href="img/favicon/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="img/favicon/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
+  <!-- End favicon reference -->
+
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
 
-  <!-- Begin bootstrap-colorPicker Stylesheets -->
+  <!-- Lib || Begin bootstrap-colorPicker Stylesheets -->
   <link href="lib/bootstrap-colorPicker/css/bootstrap-colorpicker.min.css" rel="stylesheet">
   <link href="lib/bootstrap-colorPicker/css/bootstrap-colorpicker-plus.min.css" rel="stylesheet">
-  <!-- End bootstrap-colorPicker Stylesheets -->
+  <!-- Lib || End bootstrap-colorPicker Stylesheets -->
 
-  <!-- Begin emoji-picker Stylesheets -->
+  <!-- Lib || Begin emoji-picker Stylesheets -->
   <link href="lib/emoji-picker/css/nanoscroller.css" rel="stylesheet">
   <link href="lib/emoji-picker/css/emoji.css" rel="stylesheet">
-  <!-- End emoji-picker Stylesheets -->
+  <!-- Lib || End emoji-picker Stylesheets -->
 
+  <!-- Lib || Begin Country Flags stylesheet -->
   <link rel="stylesheet" type="text/css" href="lib/flags/flags.min.css">
+  <!-- Lib || End Country Flags stylesheet -->
 
+  <!-- App's stylesheet -->
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 
@@ -49,12 +72,12 @@
 
       <div class="col-md-2">
         <button type="button" id="btnStartBroadcast" class="btn btn-primary">Start Broadcasting</button>
+        <div id="videoLocator"></div>
         <div id="panelUserList" class="panel panel-default">
           <div class="panel-heading">Chat&nbsp;Room&nbsp;User</div>
         </div>
       </div>
       <div class="col-md-8">
-        <!-- <video id="video" class="userBroadcast" autoplay></video> -->
         <div class="panel panel-default">
           <div id="lobbyListing" class="panel-heading lobbyListing">
           </div>
@@ -72,7 +95,7 @@
                     </ul>
                   </div>
                 </span>
-                <textarea name="message"  class="form-control col-md-9" style="height:50px;" 
+                <textarea name="message" class="form-control col-md-9" style="height:50px;" 
                 placeholder="Votre message..." rows="2" data-emojiable="true" data-emoji-input="unicode" autofocus></textarea>
               </div>
             </form>

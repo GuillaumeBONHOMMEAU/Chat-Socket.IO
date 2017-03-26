@@ -196,19 +196,23 @@ $(document).ready(function () {
     })
   }
 
-  /* Implementation of video broadcast
-  // Grab elements, create settings, etc.
-  var video = document.getElementById('video');
-
+  // Implementation of video broadcast : https://davidwalsh.name/browser-camera
   // Get access to the camera!
-  if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
-      // Not adding `{ audio: true }` since we only want video now
-      navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-      });
-  }
-  */
+  $('#btnStartBroadcast').click(function () {
+    if (!$('video.userBroadcast').length) {
+      if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        $('#videoLocator').append('<video id="video" class="userBroadcast" autoplay></video>')
+          // Grab elements, create settings, etc.
+        var video = document.getElementById('video')
+
+          // Not adding `{ audio: true }` since we only want video now
+        navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+          video.src = window.URL.createObjectURL(stream)
+          video.play()
+        })
+      }
+    }
+  })
 
   var demo4 = $('.colorpickerplus-dropdown .colorpickerplus-container')
   demo4.colorpickerembed()
