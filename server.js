@@ -18,7 +18,7 @@ require('jsdom').env('', function (err, window) {
   $ = require('jquery')(window)
 })
 var port = process.env.PORT || 8080
-
+var PUBLIC_IP_ADDRESS = '90.49.98.96'
 // Run the server
 server.listen(port, function () {
   console.log('Server listening at port %d', port)
@@ -109,9 +109,10 @@ io.sockets.on('connection', function (pSocket) {
     // As soon as a another client connect
   pSocket.on('newClient', function (pUser) {
     pUser.id = pSocket.id // Set the socket id as the new user id (he'll keep it the whole life cycle)
+    pUser.ip = pSocket.handshake.address == '::1' ? PUBLIC_IP_ADDRESS : pSocket.handshake.address
     // If no valid pseudo, we generate one
     if (pUser.pseudo === '' || pUser.pseudo === null) {
-      pUser.pseudo = rd.randpass(8) + ' [' + pSocket.handshake.address + ']'
+      pUser.pseudo = rd.randpass(8) + ' [' + pUser.ip + ']'
     }
     pSocket.emit('updateClient', pUser) // Update the senter's user object
     chatObject.users.push(pUser) // Save the new user object

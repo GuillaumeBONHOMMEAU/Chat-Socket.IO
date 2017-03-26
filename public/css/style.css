@@ -65,6 +65,10 @@ span.glyphicon::before {
     padding-bottom: 8px;
 }
 
+#panelUserList img.flag {
+	margin-left: 10px;
+}
+
 .panelOpenedChat {
 	background-color: lightyellow;
 }

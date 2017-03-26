@@ -3,8 +3,9 @@ var socket = io.connect('http://localhost:8080')
 var user = {
   pseudo: '',
   id: '',
-  chatJoined: []
+  ip: ''
 }
+var chatJoined = []
 var hasAutojoined = false
 var chatToJoin = null
 
@@ -32,7 +33,7 @@ socket.on('newMessage', function (pData) {
       // Log while connecting
 socket.on('noticeUserJoinedRoom', function (pData) {
   // alert('userJoinRoom : ' + pData.chat + ' | ' + pData.pseudo)
-  user.chatJoined.forEach(function (chatJoined) {
+  chatJoined.forEach(function (chatJoined) {
     if (chatJoined === pData.chat) {
       $('#chatZone_' + pData.chat.replace(new RegExp(' ', 'g'), '')).append('<p class="alert alert-info"><em>' + pData.pseudo + ' a rejoint le Chat !</em></p>')
     }
@@ -41,7 +42,7 @@ socket.on('noticeUserJoinedRoom', function (pData) {
 
 socket.on('noticeUserLeftRoom', function (pData) {
   // alert('userLeftRoom : ' + pData.chat + ' | ' + pData.pseudo)
-  user.chatJoined.forEach(function (chatJoined) {
+  chatJoined.forEach(function (chatJoined) {
     if (chatJoined === pData.chat) {
       $('#chatZone_' + pData.chat.replace(new RegExp(' ', 'g'), '')).append('<p class="alert alert-warning"><em>' + pData.pseudo + ' a quitté le Chat !</em></p>')
     }
@@ -117,20 +118,34 @@ function updatePanelUserList (pChatList) {
         lUser = element
       }
     })
-    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '</div>')
+    var country = 'fr'
+    /*$.ajax({
+      url: 'http://ipinfo.io/'+ lUser.ip +'/json',
+      type: 'GET',
+      success: function(json)
+      {
+        country = json.country
+      },
+      error: function(err)
+      {
+        country = 'fr'
+      }
+    })
+    alert(country)*/
+    panelUserList.append('<div class="panel-body" id="' + lUser.id + '">' + lUser.pseudo + '<img src="../lib/flags/blank.gif" class="flag flag-'+ country.toLowerCase() +'" alt="Country Flag - '+ country +'" /></div>')
   }
 }
 
 function joinChat (pChatName) {
   var isChatJoined = false
-  user.chatJoined.forEach(function (chatJoined) {
+  chatJoined.forEach(function (chatJoined) {
     if (pChatName === chatJoined) {
       isChatJoined = true
     }
   })
 
   if (isChatJoined === false) {
-    user.chatJoined.push(pChatName)
+    chatJoined.push(pChatName)
     $('#panelChatZone').prepend('<section id="chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '') + '"></section>')
     socket.emit('joinChat', pChatName)
   }
@@ -147,7 +162,7 @@ function leaveChat (pChatName) {
     chatToJoin = $('#lobbyListing .btn-default').text()
   }
 
-  user.chatJoined.splice($.inArray(pChatName, user.chatJoined), 1)
+  chatJoined.splice($.inArray(pChatName, chatJoined), 1)
   $('#chatZone_' + pChatName.replace(new RegExp(' ', 'g'), '')).remove()
   socket.emit('leaveChat', pChatName)
 }
