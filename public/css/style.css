@@ -85,6 +85,14 @@ video.userBroadcast {
 	min-height: 35px;
 }
 
+.colorpickerplus-container .input-group {
+	margin-top: 10px;
+}
+
+.colorpickerplus-container .input-group input {
+	height: 35px;
+}
+
 #demo4 ul {
 	padding: 0;
 }
