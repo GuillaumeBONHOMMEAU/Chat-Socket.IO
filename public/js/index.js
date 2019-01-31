@@ -1,5 +1,6 @@
 // Connection to socket.io
-var socket = io.connect('http://localhost:8080')
+// var socket = io.connect('http://localhost:8080')
+var socket = io.connect('https://doshibu-chat-socket-io.azurewebsites.net/')
 var user = {
   pseudo: '',
   id: '',
